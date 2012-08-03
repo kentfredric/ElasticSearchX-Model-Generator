@@ -48,14 +48,11 @@ use Sub::Exporter -setup => {
   ]
 };
 use MooseX::Has::Sugar qw( rw ro required );
-use Sub::Quote qw( quote_sub );
 
 has mapping_url => rw, required;
 has base_dir    => rw, required;
 
 has generator_base_class => rw, default => quote_sub(q{ 'ElasticSearchX::Model::Generator' });
-has generated_base_class => rw, default => quote_sub(q{ 'MyModel' });
-
 has document_generator_class  => is => lazy =>,;
 has attribute_generator_class => is => lazy =>,;
 has typename_translator_class => is => lazy =>,;
@@ -81,7 +78,11 @@ sub _build_document_generator_class {
 sub _build_document_generator {
   my $self = shift;
   require Module::Runtime;
-  return Module::Runtime::use_module( $self->document_generator_class )->new( generator_base => $self, );
+  return Module::Runtime::use_module( $self->document_generator_class )
+    ->new(
+    	attribute_generator => $self->attribute_generator, 
+	typename_translator => $self->typename_translator,
+  );
 }
 
 sub _build_attribute_generator_class {
@@ -92,18 +93,20 @@ sub _build_attribute_generator_class {
 sub _build_attribute_generator {
   my $self = shift;
   require Module::Runtime;
-  return Module::Runtime::use_module( $self->attribute_generator_class )->new( generator_base => $self );
+  return Module::Runtime::use_module( $self->attribute_generator_class )->new(
+  	typename_translator => $self->typename_translator,
+  );
 }
 
 sub _build_typename_translator_class {
-  my $self = shift;
-  return $self->generator_base_class . '::TypenameTranslator';
+	my $self = shift;
+	return $self->generator_base_class . '::TypenameTranslator';
 }
 
 sub _build_typename_translator {
-  my $self = shift;
-  require Module::Runtime;
-  return Module::Runtime::use_module( $self->typename_translator_class )->new( generator_base => $self );
+	my $self = shift;
+  	require Module::Runtime;
+	return Module::Runtime::use_module( $self->typename_translator_class )->new();
 }
 
 sub _build__mapping_content {
@@ -164,23 +167,17 @@ sub property {
 }
 
 sub documents {
-  my ( $self, @indices ) = @_;
-  if ( not @indices ) {
-    @indices = $self->index_names;
-  }
-  my @documents;
-  for my $index (@indices) {
-    for my $typename ( $self->type_names($index) ) {
-      push @documents, $self->document_generator->generate(
-      	index    => $index,
-        typename => $typename,
-        typedata => $self->type( $index, $typename ),
-      );
-    }
-  }
-  return @documents;
-}
+	my ( $self, @indices ) = @_;
+	if ( not @indices ){ 
+		@indices = $self->index_names;
+	}
+	my @documents;
+	for my $index ( @indices ) {
+		for my $type ( $self->type_names( $index ) ) {
 
-no Moo;
+			$self->document_generator->generate(	
+		}
+}
+}
 
 1;
