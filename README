@@ -1,0 +1,32 @@
+NAME
+    ElasticSearchX::Model::Generator - Create a suite of ESX::Model classes
+    from an existing mapping.
+
+VERSION
+    version 0.1.0
+
+SYNOPSIS
+            use ElasticSearchX::Model::Generator qw( generate_model );
+
+
+            generate_model( 
+                    mapping_url => 'http://someserver:port/path/_mapping',
+                    generated_base_class => 'MyModel',
+                    base_dir => "../path/to/export/dir/"
+            );
+
+DESCRIPTION
+    ALPHA Code: This class at present only contains code sufficient for very
+    simple package generation for use in creating a model from an existing
+    mapping for the purposes of search.
+
+AUTHOR
+    Kent Fredric <kentfredric@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2012 by Kent Fredric
+    <kentfredric@gmail.com>.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
