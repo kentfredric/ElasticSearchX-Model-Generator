@@ -21,7 +21,7 @@ has
 
 sub _words {
   my ( $self, $input ) = @_;
-  return split /[^\w]+/, $input;
+  return split /\W+/, $input;
 }
 
 sub translate_to_path {
@@ -40,7 +40,7 @@ sub translate_to_path {
   }
   $basename .= '.pm';
   require Path::Class::Dir;
-  return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst($_) } @words )->file( ucfirst($basename) );
+  return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst $_ } @words )->file( ucfirst $basename );
 }
 
 sub translate_to_package {
