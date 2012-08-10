@@ -8,9 +8,30 @@ package ElasticSearchX::Model::Generator::Generated::Document;
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
 
+=attr package
+
+  rw, required
+
+=attr path
+
+  rw, required
+
+=attr content
+
+  rw, required
+
+=cut
+
 has 'package' => rw, required;
 has 'path'    => rw, required;
 has 'content' => rw, required;
+
+=method write
+
+  $document->write();
+  # $document->path is filled with $document->content
+
+=cut
 
 sub write {
   my ( $self, %args ) = @_;
@@ -19,6 +40,15 @@ sub write {
   $file->openw->print( $self->content );
   return;
 }
+
+=method evaluate
+
+  $document->evaluate();
+  my $instance = $document->package->new(
+    # magical =D
+  );
+
+=cut
 
 sub evaluate {
   my ( $self, %args ) = @_;

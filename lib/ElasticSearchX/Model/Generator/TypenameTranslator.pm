@@ -3,20 +3,39 @@ use warnings;
 
 package ElasticSearchX::Model::Generator::TypenameTranslator;
 
-# ABSTRACT:
+# ABSTRACT: Transform upstream type/document names to downstream Package/Class/File names.
 
 use Moo;
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
+=attr generator_base
+
+  rw, required, weak_ref
+
+=cut
+
 has
   'generator_base' => rw,
   required, weak_ref, handles => [qw( attribute_generator document_generator generated_base_class base_dir )];
+
+=p_method _words
+
+  @words = $instance->_words( $string );
+
+=cut
 
 sub _words {
   my ( $self, $input ) = @_;
   return split /\W+/, $input;
 }
+
+=method translate_to_path
+
+  my $path = $instance->translate_to_path( 'file' );
+  # ->  /my/base/dir/File.pm
+
+=cut
 
 sub translate_to_path {
   my ( $self, %args ) = @_;
@@ -36,6 +55,13 @@ sub translate_to_path {
   require Path::Class::Dir;
   return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst $_ } @words )->file( ucfirst $basename );
 }
+
+=method translate_to_package
+
+  my $package = $instance->translate_to_package('file');
+  # -> MyBaseClass::File
+
+=cut
 
 sub translate_to_package {
   my ( $self, %args ) = @_;

@@ -3,15 +3,34 @@ use warnings;
 
 package ElasticSearchX::Model::Generator::DocumentGenerator;
 
-# ABSTRACT:
+# ABSTRACT: Moose Class generation backend for Documents/Types.
 
+use 5.10.0;
 use Moo;
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
+=attr generator_base
+
+  rw, required, weak_ref
+
+=cut
+
 has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_generator typename_translator )];
 
-my $document_template = <<'EOF';
+=method generate
+
+  $generated_document = $documentgenerator->generate(
+    index        => ... Name of current index ...
+    typename     => ... Name of the type we're generating ...
+  );
+  $generated_document->isa(ElasticSearchX::Model::Generator::Generated::Document);
+
+=cut
+
+sub generate {
+  my ( $self, %args ) = @_;
+  state $document_template = <<'EOF';
 package %s;
 use strict;
 use warnings FATAL => 'all';
@@ -27,8 +46,6 @@ __PACKAGE__->meta->make_immutable;
 
 EOF
 
-sub generate {
-  my ( $self, %args ) = @_;
   my $class = $self->typename_translator->translate_to_package( typename => $args{typename} );
   my $path = $self->typename_translator->translate_to_path( typename => $args{typename} );
   my @attributes;

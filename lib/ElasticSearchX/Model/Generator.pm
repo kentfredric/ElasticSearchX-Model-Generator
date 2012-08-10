@@ -9,20 +9,20 @@ use Moo;
 
 =head1 DESCRIPTION
 
-B<ALPHA Code>: This class at present only contains code sufficient for very simple package generation for use in creating a model from an existing mapping for the purposes of search. 
+B<ALPHA Code>: This class at present only contains code sufficient for very simple package generation for use in creating a model from an existing mapping for the purposes of search.
 
 
 =head1 SYNOPSIS
 
   use ElasticSearchX::Model::Generator qw( generate_model );
 
-  my $instance = generate_model( 
+  my $instance = generate_model(
     mapping_url => 'http://someserver:port/path/_mapping',
     generated_base_class => 'MyModel',
     base_dir => "../path/to/export/dir/"
   );
 
-  for my $document ( $instance->documents ) { 
+  for my $document ( $instance->documents ) {
     # Write the document to disk
     $document->write();
     # Alternatively, load the generated document into memory avoiding writing to disk
@@ -33,7 +33,7 @@ B<ALPHA Code>: This class at present only contains code sufficient for very simp
 
 =export generate_model
 
-this is just a sugar syntax for ESX:M:G->new() you can elect to import to make your code slightly shorter. 
+this is just a sugar syntax for ESX:M:G->new() you can elect to import to make your code slightly shorter.
 
 =cut
 
@@ -96,7 +96,7 @@ has document_generator_class  => is => lazy =>,;
 has attribute_generator_class => is => lazy =>,;
 has typename_translator_class => is => lazy =>,;
 
-=attr document_generator 
+=attr document_generator
 
   lazy
 
@@ -212,7 +212,7 @@ sub _build_typename_translator {
   return Module::Runtime::use_module( $self->typename_translator_class )->new( generator_base => $self );
 }
 
-=p_method _build__mapping_content 
+=p_method _build__mapping_content
 
 returns the content of the url at C<mapping_url>
 
@@ -264,10 +264,10 @@ sub index_names {
 
 =method index
 
-  $data = $esmg->index('') # If indices are not in the dataset 
-  $data = $esmg->index('cpan_v1') # if indices are in the dataset 
+  $data = $esmg->index('') # If indices are not in the dataset
+  $data = $esmg->index('cpan_v1') # if indices are in the dataset
 
-Returns the dataset nested under the specified index. 
+Returns the dataset nested under the specified index.
 
 =cut
 
@@ -339,7 +339,7 @@ sub property {
 
 =method documents
 
-  @documents = $esmg->documents(); # all documents for all indices 
+  @documents = $esmg->documents(); # all documents for all indices
   @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
   @documents = $esmg->documents(''); # all documents for an index-free dataset.
 
