@@ -34,9 +34,9 @@ sub evaluate {
   $INC{$mn} = 1;
   local ( $@, $! ) = ();
   ## no critic ( ProhibitStringyEval )
-  if ( not eval $self->content ){
+  if ( not eval $self->content ) {
     require Carp;
-    Carp::croak(sprintf 'content for %s did not load: %s %s', $self->package, $@ $! );
+    Carp::croak( sprintf 'content for %s did not load: %s %s', $self->package, $@, $! );
   }
   ## no critic ( RequireCarping )
   die $@ if $@;
