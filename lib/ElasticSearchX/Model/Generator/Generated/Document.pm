@@ -24,9 +24,17 @@ sub evaluate {
   my ( $self, %args ) = @_;
   require Module::Runtime;
   my $mn = Module::Runtime::module_notional_filename( $self->package );
+  ## no critic (RequireLocalizedPunctuationVars)
   $INC{$mn} = 1;
-  local ( $@, $! );
-  eval $self->content;
+  local ( $@, $! ) = ();
+  ## no critic ( ProhibitStringyEval )
+  if ( not eval $self->content ) {
+    require Carp;
+    Carp::croak( sprintf 'content for %s did not load: %s %s', $self->package, $@, $! );
+  }
+  ## no critic ( RequireCarping )
+  die $@ if $@;
+  return;
 }
 no Moo;
 
