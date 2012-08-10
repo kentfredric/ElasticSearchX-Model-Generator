@@ -9,15 +9,20 @@ BEGIN {
   $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.0';
 }
 
-# ABSTRACT:
+# ABSTRACT: Moose Class generation backend for Documents/Types.
 
+use 5.10.0;
 use Moo;
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
+
 has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_generator typename_translator )];
 
-my $document_template = <<'EOF';
+
+sub generate {
+  my ( $self, %args ) = @_;
+  state $document_template = <<'EOF';
 package %s;
 use strict;
 use warnings FATAL => 'all';
@@ -33,8 +38,6 @@ __PACKAGE__->meta->make_immutable;
 
 EOF
 
-sub generate {
-  my ( $self, %args ) = @_;
   my $class = $self->typename_translator->translate_to_package( typename => $args{typename} );
   my $path = $self->typename_translator->translate_to_path( typename => $args{typename} );
   my @attributes;
@@ -67,11 +70,27 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::DocumentGenerator - use Moo;
+ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation backend for Documents/Types.
 
 =head1 VERSION
 
 version 0.1.0
+
+=head1 METHODS
+
+=head2 generate
+
+  $generated_document = $documentgenerator->generate(
+    index        => ... Name of current index ...
+    typename     => ... Name of the type we're generating ...
+  );
+  $generated_document->isa(ElasticSearchX::Model::Generator::Generated::Document);
+
+=head1 ATTRIBUTES
+
+=head2 generator_base
+
+  rw, required, weak_ref
 
 =head1 AUTHOR
 

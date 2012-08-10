@@ -9,20 +9,23 @@ BEGIN {
   $ElasticSearchX::Model::Generator::TypenameTranslator::VERSION = '0.1.0';
 }
 
-# ABSTRACT:
+# ABSTRACT: Transform upstream type/document names to downstream Package/Class/File names.
 
 use Moo;
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
+
 has
   'generator_base' => rw,
   required, weak_ref, handles => [qw( attribute_generator document_generator generated_base_class base_dir )];
+
 
 sub _words {
   my ( $self, $input ) = @_;
   return split /\W+/, $input;
 }
+
 
 sub translate_to_path {
   my ( $self, %args ) = @_;
@@ -43,6 +46,7 @@ sub translate_to_path {
   return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst $_ } @words )->file( ucfirst $basename );
 }
 
+
 sub translate_to_package {
   my ( $self, %args ) = @_;
   return sprintf q{%s::%s}, $self->generated_base_class, join q{}, map { ucfirst $_ } $self->_words( $args{typename} );
@@ -59,11 +63,35 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::TypenameTranslator - use Moo;
+ElasticSearchX::Model::Generator::TypenameTranslator - Transform upstream type/document names to downstream Package/Class/File names.
 
 =head1 VERSION
 
 version 0.1.0
+
+=head1 METHODS
+
+=head2 translate_to_path
+
+  my $path = $instance->translate_to_path( 'file' );
+  # ->  /my/base/dir/File.pm
+
+=head2 translate_to_package 
+
+  my $package = $instance->translate_to_package('file');
+  # -> MyBaseClass::File
+
+=head1 ATTRIBUTES
+
+=head2 generator_base
+
+  rw, required, weak_ref
+
+=head1 PRIVATE METHODS
+
+=head2 _words
+
+  @words = $instance->_words( $string );
 
 =head1 AUTHOR
 
