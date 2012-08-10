@@ -33,9 +33,10 @@ sub evaluate {
   $INC{$mn} = 1;
   local ( $@, $! ) = ();
   ## no critic ( ProhibitStringyEval )
-  eval $self->content eq '1' or do {
-    die "Error loading generated content, $! $@";
-  };
+  if ( not eval $self->content ){
+    require Carp;
+    Carp::croak(sprintf 'content for %s did not load: %s %s', $self->package, $@ $! );
+  }
   die $@ if $@;
   return;
 }
