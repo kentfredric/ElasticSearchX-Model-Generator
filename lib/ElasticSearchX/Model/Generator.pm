@@ -19,19 +19,9 @@ B<ALPHA Code>: This class at present only contains code sufficient for very simp
 
 	generate_model( 
 		mapping_url => 'http://someserver:port/path/_mapping',
-		as => 'MyModel',
+		generated_base_class => 'MyModel',
 		base_dir => "../path/to/export/dir/"
 	);
-	# or
-	generate_model( 
-		mapping_url => 'http://someserver:port/path/_mapping',
-		base_dir => "../path/to/export/dir/"
-		packages => { 
-			'foo' => 'MyModel::Foo'
-		}
-	);
-
-
 
 =cut
 
@@ -172,7 +162,7 @@ sub documents {
   for my $index (@indices) {
     for my $typename ( $self->type_names($index) ) {
       push @documents, $self->document_generator->generate(
-      	index    => $index,
+        index    => $index,
         typename => $typename,
         typedata => $self->type( $index, $typename ),
       );
