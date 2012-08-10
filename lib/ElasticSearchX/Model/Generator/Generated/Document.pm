@@ -21,11 +21,11 @@ sub write {
 }
 
 sub evaluate {
-  my ( $self , %args ) = @_;
+  my ( $self, %args ) = @_;
   require Module::Runtime;
   my $mn = Module::Runtime::module_notional_filename( $self->package );
   $INC{$mn} = 1;
-  local ($@, $!);
+  local ( $@, $! );
   eval $self->content;
 }
 no Moo;
