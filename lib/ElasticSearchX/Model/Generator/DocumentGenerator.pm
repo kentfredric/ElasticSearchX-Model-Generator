@@ -44,6 +44,7 @@ sub generate {
 
   require ElasticSearchX::Model::Generator::Generated::Document;
   return ElasticSearchX::Model::Generator::Generated::Document->new(
+    package => $class,
     path    => $path,
     content => ( sprintf $document_template, $class, join qq{\n}, map { $_->content } @attributes ),
   );
