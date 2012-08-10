@@ -31,8 +31,9 @@ sub evaluate {
   require Module::Runtime;
   my $mn = Module::Runtime::module_notional_filename( $self->package );
   $INC{$mn} = 1;
-  local ( $@, $! );
-  eval $self->content;
+  local ( $@, $! ) = ();
+  ## no critic ( ProhibitStringyEval )
+  return eval $self->content;
 }
 no Moo;
 
