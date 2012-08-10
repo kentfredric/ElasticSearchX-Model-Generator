@@ -10,14 +10,22 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "author",
 #   typename => "rating",
 # }
-has "author"                       => ( is => rw =>, );
+has "author"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { format => "dateOptionalTime", store => "yes", type => "date" },
 #   propertyname => "date",
 #   typename => "rating",
 # }
-has "date"                         => ( is => rw =>, );
+has "date"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -29,14 +37,22 @@ has "date"                         => ( is => rw =>, );
 #   propertyname => "details",
 #   typename => "rating",
 # }
-has "details"                      => ( is => rw =>, );
+has "details"                      => (
+    "dynamic"                      => undef,
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "distribution",
 #   typename => "rating",
 # }
-has "distribution"                 => ( is => rw =>, );
+has "distribution"                 => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -49,28 +65,45 @@ has "distribution"                 => ( is => rw =>, );
 #   propertyname => "helpful",
 #   typename => "rating",
 # }
-has "helpful"                      => ( is => rw =>, );
+has "helpful"                      => (
+    "dynamic"                      => undef,
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "float" },
 #   propertyname => "rating",
 #   typename => "rating",
 # }
-has "rating"                       => ( is => rw =>, );
+has "rating"                       => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "float",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "release",
 #   typename => "rating",
 # }
-has "release"                      => ( is => rw =>, );
+has "release"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "user",
 #   typename => "rating",
 # }
-has "user"                         => ( is => rw =>, );
+has "user"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;

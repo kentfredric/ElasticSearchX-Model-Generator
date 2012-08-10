@@ -21,7 +21,9 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "asciiname",
 #   typename => "author",
 # }
-has "asciiname"                    => ( is => rw =>, );
+has "asciiname"                    => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -40,28 +42,46 @@ has "asciiname"                    => ( is => rw =>, );
 #   propertyname => "blog",
 #   typename => "author",
 # }
-has "blog"                         => ( is => rw =>, );
+has "blog"                         => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "city",
 #   typename => "author",
 # }
-has "city"                         => ( is => rw =>, );
+has "city"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "country",
 #   typename => "author",
 # }
-has "country"                      => ( is => rw =>, );
+has "country"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "dir",
 #   typename => "author",
 # }
-has "dir"                          => ( is => rw =>, );
+has "dir"                          => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -74,28 +94,43 @@ has "dir"                          => ( is => rw =>, );
 #   propertyname => "donation",
 #   typename => "author",
 # }
-has "donation"                     => ( is => rw =>, );
+has "donation"                     => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "email",
 #   typename => "author",
 # }
-has "email"                        => ( is => rw =>, );
+has "email"                        => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "gravatar_url",
 #   typename => "author",
 # }
-has "gravatar_url"                 => ( is => rw =>, );
+has "gravatar_url"                 => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { type => "geo_point" },
 #   propertyname => "location",
 #   typename => "author",
 # }
-has "location"                     => ( is => rw =>, );
+has "location"                     => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -113,14 +148,21 @@ has "location"                     => ( is => rw =>, );
 #   propertyname => "name",
 #   typename => "author",
 # }
-has "name"                         => ( is => rw =>, );
+has "name"                         => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "pauseid",
 #   typename => "author",
 # }
-has "pauseid"                      => ( is => rw =>, );
+has "pauseid"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -133,7 +175,10 @@ has "pauseid"                      => ( is => rw =>, );
 #   propertyname => "perlmongers",
 #   typename => "author",
 # }
-has "perlmongers"                  => ( is => rw =>, );
+has "perlmongers"                  => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -159,35 +204,57 @@ has "perlmongers"                  => ( is => rw =>, );
 #   propertyname => "profile",
 #   typename => "author",
 # }
-has "profile"                      => ( is => rw =>, );
+has "profile"                      => (
+    "dynamic"                      => undef,
+    "include_in_root"              => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "region",
 #   typename => "author",
 # }
-has "region"                       => ( is => rw =>, );
+has "region"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { format => "dateOptionalTime", store => "yes", type => "date" },
 #   propertyname => "updated",
 #   typename => "author",
 # }
-has "updated"                      => ( is => rw =>, );
+has "updated"                      => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "user",
 #   typename => "author",
 # }
-has "user"                         => ( is => rw =>, );
+has "user"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "website",
 #   typename => "author",
 # }
-has "website"                      => ( is => rw =>, );
+has "website"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;

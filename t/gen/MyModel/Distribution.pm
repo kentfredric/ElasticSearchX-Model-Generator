@@ -23,14 +23,22 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "bugs",
 #   typename => "distribution",
 # }
-has "bugs"                         => ( is => rw =>, );
+has "bugs"                         => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "name",
 #   typename => "distribution",
 # }
-has "name"                         => ( is => rw =>, );
+has "name"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;

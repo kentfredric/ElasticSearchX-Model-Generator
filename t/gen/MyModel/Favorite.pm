@@ -10,42 +10,70 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "author",
 #   typename => "favorite",
 # }
-has "author"                       => ( is => rw =>, );
+has "author"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { format => "dateOptionalTime", store => "yes", type => "date" },
 #   propertyname => "date",
 #   typename => "favorite",
 # }
-has "date"                         => ( is => rw =>, );
+has "date"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "distribution",
 #   typename => "favorite",
 # }
-has "distribution"                 => ( is => rw =>, );
+has "distribution"                 => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "id",
 #   typename => "favorite",
 # }
-has "id"                           => ( is => rw =>, );
+has "id"                           => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "release",
 #   typename => "favorite",
 # }
-has "release"                      => ( is => rw =>, );
+has "release"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "user",
 #   typename => "favorite",
 # }
-has "user"                         => ( is => rw =>, );
+has "user"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;

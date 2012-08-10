@@ -21,35 +21,53 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "abstract",
 #   typename => "file",
 # }
-has "abstract"                     => ( is => rw =>, );
+has "abstract"                     => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "author",
 #   typename => "file",
 # }
-has "author"                       => ( is => rw =>, );
+has "author"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "authorized",
 #   typename => "file",
 # }
-has "authorized"                   => ( is => rw =>, );
+has "authorized"                   => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "binary",
 #   typename => "file",
 # }
-has "binary"                       => ( is => rw =>, );
+has "binary"                       => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { format => "dateOptionalTime", store => "yes", type => "date" },
 #   propertyname => "date",
 #   typename => "file",
 # }
-has "date"                         => ( is => rw =>, );
+has "date"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -67,14 +85,20 @@ has "date"                         => ( is => rw =>, );
 #   propertyname => "description",
 #   typename => "file",
 # }
-has "description"                  => ( is => rw =>, );
+has "description"                  => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "directory",
 #   typename => "file",
 # }
-has "directory"                    => ( is => rw =>, );
+has "directory"                    => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -109,7 +133,9 @@ has "directory"                    => ( is => rw =>, );
 #   $a->{propertydata}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "distribution"                 => ( is => rw =>, );
+has "distribution"                 => (
+    "is"                           => "rw",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -144,42 +170,67 @@ has "distribution"                 => ( is => rw =>, );
 #   $a->{propertydata}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "documentation"                => ( is => rw =>, );
+has "documentation"                => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "id",
 #   typename => "file",
 # }
-has "id"                           => ( is => rw =>, );
+has "id"                           => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "indexed",
 #   typename => "file",
 # }
-has "indexed"                      => ( is => rw =>, );
+has "indexed"                      => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "integer" },
 #   propertyname => "level",
 #   typename => "file",
 # }
-has "level"                        => ( is => rw =>, );
+has "level"                        => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "integer",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "maturity",
 #   typename => "file",
 # }
-has "maturity"                     => ( is => rw =>, );
+has "maturity"                     => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "mime",
 #   typename => "file",
 # }
-has "mime"                         => ( is => rw =>, );
+has "mime"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -226,21 +277,35 @@ has "mime"                         => ( is => rw =>, );
 #   $a->{propertydata}{properties}{name}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{properties}{name}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "module"                       => ( is => rw =>, );
+has "module"                       => (
+    "dynamic"                      => undef,
+    "include_in_root"              => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "name",
 #   typename => "file",
 # }
-has "name"                         => ( is => rw =>, );
+has "name"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "path",
 #   typename => "file",
 # }
-has "path"                         => ( is => rw =>, );
+has "path"                         => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -257,14 +322,21 @@ has "path"                         => ( is => rw =>, );
 #   propertyname => "pod",
 #   typename => "file",
 # }
-has "pod"                          => ( is => rw =>, );
+has "pod"                          => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "no", store => "yes", type => "string" },
 #   propertyname => "pod_lines",
 #   typename => "file",
 # }
-has "pod_lines"                    => ( is => rw =>, );
+has "pod_lines"                    => (
+    "index"                        => "no",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -299,21 +371,31 @@ has "pod_lines"                    => ( is => rw =>, );
 #   $a->{propertydata}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "release"                      => ( is => rw =>, );
+has "release"                      => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "integer" },
 #   propertyname => "sloc",
 #   typename => "file",
 # }
-has "sloc"                         => ( is => rw =>, );
+has "sloc"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "integer",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "integer" },
 #   propertyname => "slop",
 #   typename => "file",
 # }
-has "slop"                         => ( is => rw =>, );
+has "slop"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "integer",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -329,28 +411,45 @@ has "slop"                         => ( is => rw =>, );
 #   propertyname => "stat",
 #   typename => "file",
 # }
-has "stat"                         => ( is => rw =>, );
+has "stat"                         => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "status",
 #   typename => "file",
 # }
-has "status"                       => ( is => rw =>, );
+has "status"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "version",
 #   typename => "file",
 # }
-has "version"                      => ( is => rw =>, );
+has "version"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "float" },
 #   propertyname => "version_numified",
 #   typename => "file",
 # }
-has "version_numified"             => ( is => rw =>, );
+has "version_numified"             => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "float",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;

@@ -21,35 +21,54 @@ use ElasticSearchX::Model::Document;
 #   propertyname => "abstract",
 #   typename => "release",
 # }
-has "abstract"                     => ( is => rw =>, );
+has "abstract"                     => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "archive",
 #   typename => "release",
 # }
-has "archive"                      => ( is => rw =>, );
+has "archive"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "author",
 #   typename => "release",
 # }
-has "author"                       => ( is => rw =>, );
+has "author"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "authorized",
 #   typename => "release",
 # }
-has "authorized"                   => ( is => rw =>, );
+has "authorized"                   => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { format => "dateOptionalTime", store => "yes", type => "date" },
 #   propertyname => "date",
 #   typename => "release",
 # }
-has "date"                         => ( is => rw =>, );
+has "date"                         => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -67,7 +86,11 @@ has "date"                         => ( is => rw =>, );
 #   propertyname => "dependency",
 #   typename => "release",
 # }
-has "dependency"                   => ( is => rw =>, );
+has "dependency"                   => (
+    "dynamic"                      => undef,
+    "include_in_root"              => "1",
+    "is"                           => "rw",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -102,42 +125,68 @@ has "dependency"                   => ( is => rw =>, );
 #   $a->{propertydata}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "distribution"                 => ( is => rw =>, );
+has "distribution"                 => (
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "download_url",
 #   typename => "release",
 # }
-has "download_url"                 => ( is => rw =>, );
+has "download_url"                 => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "boolean" },
 #   propertyname => "first",
 #   typename => "release",
 # }
-has "first"                        => ( is => rw =>, );
+has "first"                        => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "boolean",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "id",
 #   typename => "release",
 # }
-has "id"                           => ( is => rw =>, );
+has "id"                           => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "license",
 #   typename => "release",
 # }
-has "license"                      => ( is => rw =>, );
+has "license"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "maturity",
 #   typename => "release",
 # }
-has "maturity"                     => ( is => rw =>, );
+has "maturity"                     => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -172,7 +221,9 @@ has "maturity"                     => ( is => rw =>, );
 #   $a->{propertydata}{fields}{lowercase}{include_in_all} = \${$a->{propertydata}{fields}{analyzed}{include_in_all}};
 #   $a;
 # }
-has "name"                         => ( is => rw =>, );
+has "name"                         => (
+    "is"                           => "rw",
+);
 # do {
 #   my $a = {
 #     index => "cpan_v1",
@@ -212,7 +263,11 @@ has "name"                         => ( is => rw =>, );
 #   $a->{propertydata}{properties}{repository}{include_in_root} = \${$a->{propertydata}{include_in_root}};
 #   $a;
 # }
-has "resources"                    => ( is => rw =>, );
+has "resources"                    => (
+    "dynamic"                      => "1",
+    "include_in_root"              => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -228,14 +283,22 @@ has "resources"                    => ( is => rw =>, );
 #   propertyname => "stat",
 #   typename => "release",
 # }
-has "stat"                         => ( is => rw =>, );
+has "stat"                         => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "status",
 #   typename => "release",
 # }
-has "status"                       => ( is => rw =>, );
+has "status"                       => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => {
@@ -250,21 +313,33 @@ has "status"                       => ( is => rw =>, );
 #   propertyname => "tests",
 #   typename => "release",
 # }
-has "tests"                        => ( is => rw =>, );
+has "tests"                        => (
+    "dynamic"                      => "1",
+    "is"                           => "rw",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { index => "not_analyzed", store => "yes", type => "string" },
 #   propertyname => "version",
 #   typename => "release",
 # }
-has "version"                      => ( is => rw =>, );
+has "version"                      => (
+    "index"                        => "not_analyzed",
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "string",
+);
 # {
 #   index => "cpan_v1",
 #   propertydata => { store => "yes", type => "float" },
 #   propertyname => "version_numified",
 #   typename => "release",
 # }
-has "version_numified"             => ( is => rw =>, );
+has "version_numified"             => (
+    "is"                           => "rw",
+    "store"                        => "yes",
+    "type"                         => "float",
+);
 
 no Moose;
 __PACKAGE__->meta->make_immutable;
