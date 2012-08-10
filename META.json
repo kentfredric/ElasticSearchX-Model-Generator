@@ -55,11 +55,9 @@
       },
       "test" : {
          "requires" : {
-            "ElasticSearchX::Model::Document" : "0",
             "File::Find" : "0",
             "File::Temp" : "0",
             "FindBin" : "0",
-            "Moose" : "0",
             "Test::More" : "0.98"
          }
       }
@@ -106,7 +104,6 @@
          "Data::Dump" : "1.21",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.5.0",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
-         "ElasticSearchX::Model::Document" : "0.1.0",
          "File::Find" : "1.20",
          "File::Temp" : "0.22",
          "FindBin" : "1.51",
@@ -115,7 +112,6 @@
          "Module::Build" : "0.4002",
          "Module::Runtime" : "0.013",
          "Moo" : "1.000003",
-         "Moose" : "2.0603",
          "MooseX::Has::Sugar" : "0.05070421",
          "Path::Class::Dir" : "0.26",
          "Scalar::Util" : "1.25",

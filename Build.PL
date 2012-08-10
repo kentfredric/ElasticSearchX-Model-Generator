@@ -7,12 +7,10 @@ use Module::Build 0.3601;
 
 my %module_build_args = (
   "build_requires" => {
-    "ElasticSearchX::Model::Document" => 0,
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
     "Module::Build" => "0.4002",
-    "Moose" => 0,
     "Test::More" => "0.98"
   },
   "configure_requires" => {

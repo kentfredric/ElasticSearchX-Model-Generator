@@ -17,16 +17,6 @@ lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm
 perlcritic.rc
 t/00-compile.t
 t/000-report-versions-tiny.t
-t/gen/MyModel/Author.pm
-t/gen/MyModel/Dependency.pm
-t/gen/MyModel/Distribution.pm
-t/gen/MyModel/Favorite.pm
-t/gen/MyModel/File.pm
-t/gen/MyModel/Mirror.pm
-t/gen/MyModel/Module.pm
-t/gen/MyModel/Profile.pm
-t/gen/MyModel/Rating.pm
-t/gen/MyModel/Release.pm
 t/mcpan.t
 weaver.ini
 xt/author/critic.t
