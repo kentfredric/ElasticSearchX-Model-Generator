@@ -12,6 +12,7 @@ my $instance = generate_model(
 );
 use Data::Dump qw( pp );
 for my $document ( $instance->documents() ) {
+    *STDERR->print("Writing " . $document->path  . "\n");
     $document->write;
 }
 
