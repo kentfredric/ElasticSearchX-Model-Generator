@@ -9,14 +9,16 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.0';
 }
 
-# ABSTRACT:
+# ABSTRACT: Generator that emits 'has' declarations for type properties.
 
 use 5.10.0;
 use Moo;
 use Data::Dump qw( pp quote );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
+
 has 'generator_base' => rw, required, weak_ref, handles => [qw( document_generator typename_translator )];
+
 
 sub expand_type {
   my ($type) = shift;
@@ -48,6 +50,7 @@ sub expand_type {
   }
 }
 
+
 sub fill_property_template {
   my (@args) = @_;
   state $property_template = <<'PROP';
@@ -55,6 +58,7 @@ sub fill_property_template {
 PROP
   return sprintf $property_template, $args[0], $args[1];
 }
+
 
 sub fill_attribute_template {
   my (@args) = @_;
@@ -72,6 +76,7 @@ EOF
 
 }
 
+
 sub hash_to_proplist {
   my (%hash) = @_;
   my $propdata = join q{}, map {
@@ -82,6 +87,7 @@ sub hash_to_proplist {
   chomp $propdata;
   return $propdata;
 }
+
 
 sub generate {
   my ( $self, %args ) = @_;
@@ -146,11 +152,71 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::AttributeGenerator - use 5.10.0;
+ElasticSearchX::Model::Generator::AttributeGenerator - Generator that emits 'has' declarations for type properties.
 
 =head1 VERSION
 
 version 0.1.0
+
+=head1 METHODS
+
+=head2 generate
+
+  $generated_attribute = $attributegenerator->generate(
+    propertydata => ... Property definition from JSON ...
+    propertyname => ... Property name from JSON ...
+    index        => ... Name of current index ...
+    typename     => ... Name of the type we're generating ...
+  );
+
+  $generated_attribute->isa(ESX:M:G:Generated::Attribute);
+
+=head1 ATTRIBUTES
+
+=head2 generator_base
+
+  rw, required, weak_ref
+
+=head1 FUCNTIONS
+
+=head2 expand_type
+
+  %attr = ( %attr, expand_type( $type ) );
+  %attr = ( %attr, expand_type( 'boolean' ) );
+
+=head2 fill_property_template
+
+  $string = fill_property_template( $property_name, $property_value )
+
+  my $data = fill_property_template( foo => 'bar' );
+  # $data == "    foo                         => bar,\n"
+  my $data = fill_property_template(quote( 'foo' ) => quote( 'bar' ));
+  # $data == "    \"foo\"                       => \"bar\",\n"
+
+=head2 fill_attribute_template
+
+  $string = fill_attribute_template( $attribute_name, $attribute_properties_definition )
+
+  my $data = fill_attribute_template( foo => '    is => rw =>, ' );
+  # $data ==
+  # has "foo"              => (
+  #     is => rw =>, 
+  # );
+
+=head2 hash_to_proplist
+
+  $string = hash_to_proplist( %hash )
+
+  my $data = hash_to_proplist( 
+     is => rw =>,
+     required => 1,
+     foo => undef,
+  );
+  # $data = <<'EOF'
+  # "is" => "rw", 
+  # "required" => "1",
+  # "foo" => undef,
+  # EOF
 
 =head1 AUTHOR
 

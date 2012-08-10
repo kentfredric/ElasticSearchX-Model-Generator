@@ -8,7 +8,6 @@ META.yml
 README
 dist.ini
 lib/ElasticSearchX/Model/Generator.pm
-lib/ElasticSearchX/Model/Generator.pm.20120804.005516
 lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm
 lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm
 lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm
