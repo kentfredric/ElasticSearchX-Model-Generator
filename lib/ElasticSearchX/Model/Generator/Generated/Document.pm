@@ -33,7 +33,11 @@ sub evaluate {
   $INC{$mn} = 1;
   local ( $@, $! ) = ();
   ## no critic ( ProhibitStringyEval )
-  return eval $self->content;
+  eval $self->content eq '1' or do {
+    die "Error loading generated content, $! $@";
+  };
+  die $@ if $@;
+  return;
 }
 no Moo;
 
