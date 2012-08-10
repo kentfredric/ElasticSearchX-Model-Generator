@@ -45,7 +45,7 @@ sub translate_to_path {
 
 sub translate_to_package {
   my ( $self, %args ) = @_;
-  return $self->generated_base_class . '::' . join q{}, map { ucfirst($_) } $self->_words( $args{typename} );
+  return sprintf q{%s::%s}, $self->generated_base_class, join q{}, map { ucfirst $_ } $self->_words( $args{typename} );
 }
 
 no Moo;
