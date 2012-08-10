@@ -14,9 +14,11 @@ BEGIN {
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
 
+
 has 'package' => rw, required;
 has 'path'    => rw, required;
 has 'content' => rw, required;
+
 
 sub write {
   my ( $self, %args ) = @_;
@@ -25,6 +27,7 @@ sub write {
   $file->openw->print( $self->content );
   return;
 }
+
 
 sub evaluate {
   my ( $self, %args ) = @_;
@@ -58,6 +61,34 @@ ElasticSearchX::Model::Generator::Generated::Document - A Generated ESX Document
 =head1 VERSION
 
 version 0.1.0
+
+=head1 METHODS
+
+=head2 write
+
+  $document->write();
+  # $document->path is filled with $document->content
+
+=head2 evaluate
+
+  $document->evaluate();
+  my $instance = $document->package->new(
+    # magical =D 
+  );
+
+=head1 ATTRIBUTES
+
+=head2 package
+
+  rw, required
+
+=head2 path
+
+  rw, required
+
+=head2 content
+
+  rw, required
 
 =head1 AUTHOR
 

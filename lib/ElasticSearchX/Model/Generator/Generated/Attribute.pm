@@ -9,10 +9,11 @@ BEGIN {
   $ElasticSearchX::Model::Generator::Generated::Attribute::VERSION = '0.1.0';
 }
 
-# ABSTRACT:
+# ABSTRACT: Result container for a generated attribute
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
+
 
 has content => rw, required;
 
@@ -27,11 +28,17 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::Generated::Attribute - use Moo;
+ElasticSearchX::Model::Generator::Generated::Attribute - Result container for a generated attribute
 
 =head1 VERSION
 
 version 0.1.0
+
+=head1 ATTRIBUTES
+
+=head2 content
+
+  rw, required
 
 =head1 AUTHOR
 
