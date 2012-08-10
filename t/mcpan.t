@@ -12,7 +12,6 @@ my $instance = generate_model(
 );
 use Data::Dump qw( pp );
 for my $document ( $instance->documents() ) {
-	 print "#\n#" . $document->{path} . "\n";
-	 print $document->{content};
+    $document->write;
 }
 

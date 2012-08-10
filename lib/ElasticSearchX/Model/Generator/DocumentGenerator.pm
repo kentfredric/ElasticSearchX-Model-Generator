@@ -42,7 +42,32 @@ sub generate {
     );
   }
 
-  return { content => ( sprintf $document_template, $class, join qq{\n}, map { $_->{content} } @attributes ), path => $path };
+  return bless { content => ( sprintf $document_template, $class, join qq{\n}, map { $_->{content} } @attributes ), path => $path }, __PACKAGE__;
+}
+
+sub _fh {
+  my ( $self, %args )  = @_;
+  my $data = $args{data};
+  my $file = Path::Class::File->new( $data->{path} );
+  $file->dir->mkpath;
+  return $file->openw;
+}
+sub write {
+  my ( $self, %args ) = @_;
+  if ( not ref $self ) {
+    my $data = $self->generate( %args );
+    my $fh = $self->_fh( data => $data );
+    *STDERR->print("Writing $data->{path}\n");
+    $fh->print( $data->{content} );
+    return;
+  }
+  else {
+    my $fh = $self->_fh( data => $self);
+    *STDERR->print("Writing $self->{path}\n");
+    $fh->print( $self->{content} );
+    return;
+
+  }
 }
 
 no Moo;
