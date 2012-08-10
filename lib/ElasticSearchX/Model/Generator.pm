@@ -14,6 +14,7 @@ BEGIN {
 use Moo;
 
 
+
 use Sub::Exporter -setup => {
   exports => [
     generate_model => sub {
@@ -217,6 +218,12 @@ version 0.1.0
 =head1 DESCRIPTION
 
 B<ALPHA Code>: This class at present only contains code sufficient for very simple package generation for use in creating a model from an existing mapping for the purposes of search. 
+
+=head1 EXPORTS
+
+=head2 generate_model
+
+this is just a sugar syntax for ESX:M:G->new() you can elect to import to make your code slightly shorter. 
 
 =head1 METHODS
 
