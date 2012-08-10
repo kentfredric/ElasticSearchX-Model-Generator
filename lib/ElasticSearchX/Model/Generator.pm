@@ -209,11 +209,18 @@ version 0.1.0
 
   use ElasticSearchX::Model::Generator qw( generate_model );
 
-  generate_model( 
+  my $instance = generate_model( 
     mapping_url => 'http://someserver:port/path/_mapping',
     generated_base_class => 'MyModel',
     base_dir => "../path/to/export/dir/"
   );
+
+  for my $document ( $instance->documents ) { 
+    # Write the document to disk
+    $document->write();
+    # Alternatively, load the generated document into memory avoiding writing to disk
+    $document->evaluate();
+  }
 
 =head1 DESCRIPTION
 
