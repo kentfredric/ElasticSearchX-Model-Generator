@@ -89,12 +89,16 @@ sub _build__mapping_content {
   my $self     = shift;
   my $response = $self->_ua->get( $self->mapping_url );
   if ( not $response->{success} ) {
-    die sprintf qq[Failed to fetch mapping:\n\tstatus=%s\n\treason=%s\n], $response->{status}, $response->{reason};
+    require Carp;
+    Carp::confess( sprintf qq[Failed to fetch mapping:\n\tstatus=%s\n\treason=%s\n], $response->{status}, $response->{reason} );
   }
   if ( length $response->{content} != $response->{headers}->{'content-length'} ) {
-    die sprintf qq[Content length did not match expected length, _mapping failed to fetch completely.\n\tgot=%s\n\texpected%s\n],
+    require Carp;
+    Carp::confess(
+      sprintf qq[Content length did not match expected length, _mapping failed to fetch completely.\n\tgot=%s\n\texpected%s\n],
       length $response->{content},
-      $response->{headers}->{'Content-Length'};
+      $response->{headers}->{'Content-Length'}
+    );
   }
   return $response->{content};
 }
@@ -105,13 +109,13 @@ sub _build__mapping_data {
   require JSON;
   return JSON->new()->utf8(1)->decode($content);
 }
-
+## no critic ( RequireArgUnpacking ProhibitBuiltinHomonyms )
 sub index_names {
   return keys %{ $_[0]->_mapping_data };
 }
 
 sub index {
-  if ( $_[1] eq '' ) {
+  if ( $_[1] eq q{} ) {
     return $_[0]->_mapping_data;
   }
   return $_[0]->_mapping_data->{ $_[1] };
