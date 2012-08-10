@@ -206,14 +206,13 @@ version 0.1.0
 
 =head1 SYNOPSIS
 
-	use ElasticSearchX::Model::Generator qw( generate_model );
+  use ElasticSearchX::Model::Generator qw( generate_model );
 
-
-	generate_model( 
-		mapping_url => 'http://someserver:port/path/_mapping',
-		generated_base_class => 'MyModel',
-		base_dir => "../path/to/export/dir/"
-	);
+  generate_model( 
+    mapping_url => 'http://someserver:port/path/_mapping',
+    generated_base_class => 'MyModel',
+    base_dir => "../path/to/export/dir/"
+  );
 
 =head1 DESCRIPTION
 
