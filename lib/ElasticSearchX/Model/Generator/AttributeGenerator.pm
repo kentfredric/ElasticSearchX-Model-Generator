@@ -177,7 +177,7 @@ version 0.1.0
 
   rw, required, weak_ref
 
-=head1 FUCNTIONS
+=head1 FUNCTIONS
 
 =head2 expand_type
 
