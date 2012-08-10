@@ -200,20 +200,20 @@ version 0.1.0
   my $data = fill_attribute_template( foo => '    is => rw =>, ' );
   # $data ==
   # has "foo"              => (
-  #     is => rw =>, 
+  #     is => rw =>,
   # );
 
 =head2 hash_to_proplist
 
   $string = hash_to_proplist( %hash )
 
-  my $data = hash_to_proplist( 
+  my $data = hash_to_proplist(
      is => rw =>,
      required => 1,
      foo => undef,
   );
   # $data = <<'EOF'
-  # "is" => "rw", 
+  # "is" => "rw",
   # "required" => "1",
   # "foo" => undef,
   # EOF

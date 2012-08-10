@@ -76,7 +76,7 @@ version 0.1.0
   my $path = $instance->translate_to_path( 'file' );
   # ->  /my/base/dir/File.pm
 
-=head2 translate_to_package 
+=head2 translate_to_package
 
   my $package = $instance->translate_to_package('file');
   # -> MyBaseClass::File

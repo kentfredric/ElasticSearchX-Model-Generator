@@ -209,13 +209,13 @@ version 0.1.0
 
   use ElasticSearchX::Model::Generator qw( generate_model );
 
-  my $instance = generate_model( 
+  my $instance = generate_model(
     mapping_url => 'http://someserver:port/path/_mapping',
     generated_base_class => 'MyModel',
     base_dir => "../path/to/export/dir/"
   );
 
-  for my $document ( $instance->documents ) { 
+  for my $document ( $instance->documents ) {
     # Write the document to disk
     $document->write();
     # Alternatively, load the generated document into memory avoiding writing to disk
@@ -224,13 +224,13 @@ version 0.1.0
 
 =head1 DESCRIPTION
 
-B<ALPHA Code>: This class at present only contains code sufficient for very simple package generation for use in creating a model from an existing mapping for the purposes of search. 
+B<ALPHA Code>: This class at present only contains code sufficient for very simple package generation for use in creating a model from an existing mapping for the purposes of search.
 
 =head1 EXPORTS
 
 =head2 generate_model
 
-this is just a sugar syntax for ESX:M:G->new() you can elect to import to make your code slightly shorter. 
+this is just a sugar syntax for ESX:M:G->new() you can elect to import to make your code slightly shorter.
 
 =head1 METHODS
 
@@ -242,10 +242,10 @@ returns the names of all indices specified in the C<_mapping>
 
 =head2 index
 
-  $data = $esmg->index('') # If indices are not in the dataset 
-  $data = $esmg->index('cpan_v1') # if indices are in the dataset 
+  $data = $esmg->index('') # If indices are not in the dataset
+  $data = $esmg->index('cpan_v1') # if indices are in the dataset
 
-Returns the dataset nested under the specified index. 
+Returns the dataset nested under the specified index.
 
 =head2 type_names
 
@@ -273,7 +273,7 @@ Returns the dataset nested under the specified index.
 
 =head2 documents
 
-  @documents = $esmg->documents(); # all documents for all indices 
+  @documents = $esmg->documents(); # all documents for all indices
   @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
   @documents = $esmg->documents(''); # all documents for an index-free dataset.
 
@@ -307,7 +307,7 @@ Returns the dataset nested under the specified index.
 
   lazy
 
-=head2 document_generator 
+=head2 document_generator
 
   lazy
 
@@ -363,7 +363,7 @@ returns an instance of C<$attribute_generator_class>
 
 returns an instance of C<$typename_translator_class>
 
-=head2 _build__mapping_content 
+=head2 _build__mapping_content
 
 returns the content of the url at C<mapping_url>
 

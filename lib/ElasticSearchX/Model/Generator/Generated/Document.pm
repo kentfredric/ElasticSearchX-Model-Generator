@@ -73,7 +73,7 @@ version 0.1.0
 
   $document->evaluate();
   my $instance = $document->package->new(
-    # magical =D 
+    # magical =D
   );
 
 =head1 ATTRIBUTES
