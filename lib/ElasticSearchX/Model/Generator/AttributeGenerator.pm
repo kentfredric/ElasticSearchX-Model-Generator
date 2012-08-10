@@ -79,7 +79,7 @@ sub hash_to_proplist {
       ? fill_property_template( quote($_), quote( $hash{$_} ) )
       : fill_property_template( quote($_), 'undef' )
   } sort keys %hash;
-  chomp($propdata);
+  chomp $propdata;
   return $propdata;
 }
 
@@ -89,7 +89,7 @@ sub generate {
   my $definition = pp( \%args );
   $definition =~ s/^/# /gsm;
 
-  my $prefix = "";
+  my $prefix = q{};
 
   $prefix .= "$definition\n";
   state $passthrough_fields = {
