@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::VERSION = '0.1.0';
+  $ElasticSearchX::Model::Generator::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Create a suite of ESX::Model classes from an existing mapping.
@@ -203,7 +203,7 @@ ElasticSearchX::Model::Generator - Create a suite of ESX::Model classes from an 
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 SYNOPSIS
 

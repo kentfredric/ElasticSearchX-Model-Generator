@@ -3,10 +3,12 @@ abstract: 'Create a suite of ESX::Model classes from an existing mapping.'
 author:
   - 'Kent Fredric <kentfredric@gmail.com>'
 build_requires:
+  ElasticSearchX::Model::Document: 0
   File::Find: 0
   File::Temp: 0
   FindBin: 0
   Module::Build: 0.4002
+  Moose: 0
   Test::More: 0.98
 configure_requires:
   Module::Build: 0.4002
@@ -20,22 +22,22 @@ name: ElasticSearchX-Model-Generator
 provides:
   ElasticSearchX::Model::Generator:
     file: lib/ElasticSearchX/Model/Generator.pm
-    version: v0.1.0
+    version: v0.1.1
   ElasticSearchX::Model::Generator::AttributeGenerator:
     file: lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm
-    version: v0.1.0
+    version: v0.1.1
   ElasticSearchX::Model::Generator::DocumentGenerator:
     file: lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm
-    version: v0.1.0
+    version: v0.1.1
   ElasticSearchX::Model::Generator::Generated::Attribute:
     file: lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm
-    version: v0.1.0
+    version: v0.1.1
   ElasticSearchX::Model::Generator::Generated::Document:
     file: lib/ElasticSearchX/Model/Generator/Generated/Document.pm
-    version: v0.1.0
+    version: v0.1.1
   ElasticSearchX::Model::Generator::TypenameTranslator:
     file: lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm
-    version: v0.1.0
+    version: v0.1.1
 requires:
   Carp: 0
   Data::Dump: 0
@@ -54,13 +56,14 @@ requires:
 resources:
   homepage: https://github.com/kentfredric/ElasticSearchX-Model-Generator
   repository: https://github.com/kentfredric/ElasticSearchX-Model-Generator.git
-version: 0.1.0
+version: 0.1.1
 x_BuiltWith:
   modules:
     Carp: 1.26
     Data::Dump: 1.21
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.5.0
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
+    ElasticSearchX::Model::Document: 0.1.0
     File::Find: 1.20
     File::Temp: 0.22
     FindBin: 1.51
@@ -69,6 +72,7 @@ x_BuiltWith:
     Module::Build: 0.4002
     Module::Runtime: 0.013
     Moo: 1.000003
+    Moose: 2.0603
     MooseX::Has::Sugar: 0.05070421
     Path::Class::Dir: 0.26
     Scalar::Util: 1.25
@@ -298,9 +302,9 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Prereqs
       config:
         Dist::Zilla::Plugin::Prereqs:
-          phase: runtime
+          phase: test
           type: requires
-      name: Prereqs
+      name: TestRequires
       version: 4.300021
     -
       class: Dist::Zilla::Plugin::FinderCode

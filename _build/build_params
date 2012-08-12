@@ -17,7 +17,7 @@ do{ my $x = [
          'recommends' => {},
          'pod_files' => undef,
          'config_dir' => '_build',
-         'dist_version' => '0.1.0',
+         'dist_version' => '0.1.1',
          'sign' => undef,
          'recurse_into' => [],
          'build_bat' => 0,
@@ -29,7 +29,7 @@ do{ my $x = [
                                     'conflicts',
                                     'recommends'
                                   ],
-         'base_dir' => '/home/kent/perl/ElasticSearchX-Model-Generator/ElasticSearchX-Model-Generator-0.1.0',
+         'base_dir' => '/home/kent/perl/ElasticSearchX-Model-Generator/ElasticSearchX-Model-Generator-0.1.1',
          'allow_mb_mismatch' => 0,
          'xs_files' => undef,
          'destdir' => undef,
@@ -85,7 +85,7 @@ do{ my $x = [
                              ],
          'release_status' => 'stable',
          'needs_compiler' => '',
-         'orig_dir' => '/home/kent/perl/ElasticSearchX-Model-Generator/ElasticSearchX-Model-Generator-0.1.0',
+         'orig_dir' => '/home/kent/perl/ElasticSearchX-Model-Generator/ElasticSearchX-Model-Generator-0.1.1',
          'include_dirs' => [],
          'installdirs' => 'site',
          'mymetafile' => 'MYMETA.yml',
@@ -126,10 +126,12 @@ do{ my $x = [
          'license' => 'perl',
          'build_requires' => {
                                'Test::More' => '0.98',
+                               'ElasticSearchX::Model::Document' => 0,
                                'FindBin' => 0,
                                'File::Find' => 0,
                                'File::Temp' => 0,
-                               'Module::Build' => '0.4002'
+                               'Module::Build' => '0.4002',
+                               'Moose' => 0
                              },
          'config' => undef,
          'blib' => 'blib',

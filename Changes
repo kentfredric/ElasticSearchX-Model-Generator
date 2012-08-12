@@ -1,5 +1,13 @@
 Release history for ElasticSearchX-Model-Generator
 
+0.1.1 2012-08-12T05:06:03Z
+ [Bugs]
+ - add test requires to let tests work
+
+ [Dependencies::New]
+ - test requires : ElasticSearchX::Model::Document
+ - test requires : Moose
+
 0.1.0 2012-08-10T07:47:45Z
  - First version.
 

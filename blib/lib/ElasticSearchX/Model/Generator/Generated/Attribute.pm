@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::Generated::Attribute::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::Generated::Attribute::VERSION = '0.1.0';
+  $ElasticSearchX::Model::Generator::Generated::Attribute::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Result container for a generated attribute
@@ -32,7 +32,7 @@ ElasticSearchX::Model::Generator::Generated::Attribute - Result container for a 
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 ATTRIBUTES
 

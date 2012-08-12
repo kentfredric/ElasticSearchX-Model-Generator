@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::TypenameTranslator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::TypenameTranslator::VERSION = '0.1.0';
+  $ElasticSearchX::Model::Generator::TypenameTranslator::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Transform upstream type/document names to downstream Package/Class/File names.
@@ -67,7 +67,7 @@ ElasticSearchX::Model::Generator::TypenameTranslator - Transform upstream type/d
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 METHODS
 
