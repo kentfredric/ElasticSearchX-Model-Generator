@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AttributeGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.0';
+  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.1';
 }
 
 # ABSTRACT: Generator that emits 'has' declarations for type properties.
@@ -156,7 +156,7 @@ ElasticSearchX::Model::Generator::AttributeGenerator - Generator that emits 'has
 
 =head1 VERSION
 
-version 0.1.0
+version 0.1.1
 
 =head1 METHODS
 
