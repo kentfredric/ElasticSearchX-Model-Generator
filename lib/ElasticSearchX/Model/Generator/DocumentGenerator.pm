@@ -9,7 +9,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.2';
 }
 
-# ABSTRACT: Moose Class generation backend for Documents/Types.
+# ABSTRACT: Moose Class generation back end for Documents/Types.
 
 use 5.10.0;
 use Moo;
@@ -72,7 +72,7 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation backend for Documents/Types.
+ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation back end for Documents/Types.
 
 =head1 VERSION
 
