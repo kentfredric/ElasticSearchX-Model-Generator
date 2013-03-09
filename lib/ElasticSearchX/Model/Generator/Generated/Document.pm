@@ -9,7 +9,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::Generated::Document::VERSION = '0.1.2';
 }
 
-# ABSTRACT: A Generated ESX Document Model.
+# ABSTRACT: A Generated C<ESX> Document Model.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
@@ -57,7 +57,7 @@ __END__
 
 =head1 NAME
 
-ElasticSearchX::Model::Generator::Generated::Document - A Generated ESX Document Model.
+ElasticSearchX::Model::Generator::Generated::Document - A Generated C<ESX> Document Model.
 
 =head1 VERSION
 
