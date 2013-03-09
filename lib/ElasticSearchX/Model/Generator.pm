@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::VERSION = '0.1.1';
+  $ElasticSearchX::Model::Generator::VERSION = '0.1.2';
 }
 
 # ABSTRACT: Create a suite of ESX::Model classes from an existing mapping.
@@ -106,13 +106,21 @@ sub _build__mapping_content {
     require Carp;
     Carp::confess( sprintf qq[Failed to fetch mapping:\n\tstatus=%s\n\treason=%s\n], $response->{status}, $response->{reason} );
   }
-  if ( length $response->{content} != $response->{headers}->{'content-length'} ) {
+  if ( exists $response->{headers}->{'content-length'}
+    and length $response->{content} != $response->{headers}->{'content-length'} )
+  {
     require Carp;
     Carp::confess(
       sprintf qq[Content length did not match expected length, _mapping failed to fetch completely.\n\tgot=%s\n\texpected%s\n],
       length $response->{content},
       $response->{headers}->{'Content-Length'}
     );
+  }
+  if ( not exists $response->{headers}->{'content-length'} ) {
+    if ( not exists $response->{headers}->{'transfer-encoding'} or $response->{headers}->{'transfer-encoding'} ne 'chunked' ) {
+      require Carp;
+      Carp::carp(qq[No content length and no transfer-encoding=chunked, data could be broken]);
+    }
   }
   return $response->{content};
 }
@@ -178,11 +186,12 @@ sub documents {
   my @documents;
   for my $index (@indices) {
     for my $typename ( $self->type_names($index) ) {
-      push @documents, $self->document_generator->generate(
+      push @documents,
+        $self->document_generator->generate(
         index    => $index,
         typename => $typename,
         typedata => $self->type( $index, $typename ),
-      );
+        );
     }
   }
   return @documents;
@@ -193,6 +202,7 @@ no Moo;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -203,7 +213,7 @@ ElasticSearchX::Model::Generator - Create a suite of ESX::Model classes from an 
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 SYNOPSIS
 
@@ -377,10 +387,9 @@ Kent Fredric <kentfredric@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2013 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

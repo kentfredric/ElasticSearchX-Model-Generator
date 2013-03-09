@@ -1,5 +1,7 @@
 Release history for ElasticSearchX-Model-Generator
 
+0.1.2 2013-03-09T20:13:54Z
+
 0.1.1 2012-08-12T05:06:03Z
  [Bugs]
  - add test requires to let tests work
