@@ -225,13 +225,21 @@ sub _build__mapping_content {
     require Carp;
     Carp::confess( sprintf qq[Failed to fetch mapping:\n\tstatus=%s\n\treason=%s\n], $response->{status}, $response->{reason} );
   }
-  if ( length $response->{content} != $response->{headers}->{'content-length'} ) {
+  if ( exists $response->{headers}->{'content-length'}
+    and length $response->{content} != $response->{headers}->{'content-length'} )
+  {
     require Carp;
     Carp::confess(
       sprintf qq[Content length did not match expected length, _mapping failed to fetch completely.\n\tgot=%s\n\texpected%s\n],
       length $response->{content},
       $response->{headers}->{'Content-Length'}
     );
+  }
+  if ( not exists $response->{headers}->{'content-length'} ) {
+    if ( not exists $response->{headers}->{'transfer-encoding'} or $response->{headers}->{'transfer-encoding'} ne 'chunked' ) {
+      require Carp;
+      Carp::carp(qq[No content length and no transfer-encoding=chunked, data could be broken]);
+    }
   }
   return $response->{content};
 }
@@ -353,11 +361,12 @@ sub documents {
   my @documents;
   for my $index (@indices) {
     for my $typename ( $self->type_names($index) ) {
-      push @documents, $self->document_generator->generate(
+      push @documents,
+        $self->document_generator->generate(
         index    => $index,
         typename => $typename,
         typedata => $self->type( $index, $typename ),
-      );
+        );
     }
   }
   return @documents;

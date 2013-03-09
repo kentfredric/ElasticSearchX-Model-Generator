@@ -51,12 +51,13 @@ EOF
   my @attributes;
   for my $property_name ( sort { $a cmp $b } $self->generator_base->property_names( $args{index}, $args{typename} ) ) {
     my $property = $self->generator_base->property( $args{index}, $args{typename}, $property_name );
-    push @attributes, $self->attribute_generator->generate(
+    push @attributes,
+      $self->attribute_generator->generate(
       index        => $args{index},
       typename     => $args{typename},
       propertyname => $property_name,
       propertydata => $property,
-    );
+      );
   }
 
   require ElasticSearchX::Model::Generator::Generated::Document;
