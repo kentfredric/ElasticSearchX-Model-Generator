@@ -35,11 +35,11 @@ METHODS
   index_names
       @names = $esmg->index_names
 
-    returns the names of all indices specified in the "_mapping"
+    returns the names of all indexes specified in the "_mapping"
 
   index
-      $data = $esmg->index('') # If indices are not in the data set
-      $data = $esmg->index('cpan_v1') # if indices are in the data set
+      $data = $esmg->index('') # If indexes are not in the data set
+      $data = $esmg->index('cpan_v1') # if indexes are in the data set
 
     Returns the data set nested under the specified index.
 

@@ -248,12 +248,12 @@ this is just a sugar syntax for ESX:M:G->new() you can elect to import to make y
 
   @names = $esmg->index_names
 
-returns the names of all indices specified in the C<_mapping>
+returns the names of all indexes specified in the C<_mapping>
 
 =head2 index
 
-  $data = $esmg->index('') # If indices are not in the data set
-  $data = $esmg->index('cpan_v1') # if indices are in the data set
+  $data = $esmg->index('') # If indexes are not in the data set
+  $data = $esmg->index('cpan_v1') # if indexes are in the data set
 
 Returns the data set nested under the specified index.
 
