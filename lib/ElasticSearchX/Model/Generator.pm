@@ -119,7 +119,7 @@ sub _build__mapping_content {
   if ( not exists $response->{headers}->{'content-length'} ) {
     if ( not exists $response->{headers}->{'transfer-encoding'} or $response->{headers}->{'transfer-encoding'} ne 'chunked' ) {
       require Carp;
-      Carp::carp(qq[No content length and no transfer-encoding=chunked, data could be broken]);
+      Carp::carp(q[No content length and no transfer-encoding=chunked, data could be broken]);
     }
   }
   return $response->{content};
@@ -252,10 +252,10 @@ returns the names of all indices specified in the C<_mapping>
 
 =head2 index
 
-  $data = $esmg->index('') # If indices are not in the dataset
-  $data = $esmg->index('cpan_v1') # if indices are in the dataset
+  $data = $esmg->index('') # If indices are not in the data set
+  $data = $esmg->index('cpan_v1') # if indices are in the data set
 
-Returns the dataset nested under the specified index.
+Returns the data set nested under the specified index.
 
 =head2 type_names
 
@@ -283,7 +283,7 @@ Returns the dataset nested under the specified index.
 
 =head2 documents
 
-  @documents = $esmg->documents(); # all documents for all indices
+  @documents = $esmg->documents(); # all documents for all indexes
   @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
   @documents = $esmg->documents(''); # all documents for an index-free dataset.
 
@@ -375,11 +375,11 @@ returns an instance of C<$typename_translator_class>
 
 =head2 _build__mapping_content
 
-returns the content of the url at C<mapping_url>
+returns the content of the URL at C<mapping_url>
 
 =head2 _build__mapping_data
 
-returns the decoded data from JSON stored in C<_mapping_content>
+returns the decoded data from C<JSON> stored in C<_mapping_content>
 
 =head1 AUTHOR
 
