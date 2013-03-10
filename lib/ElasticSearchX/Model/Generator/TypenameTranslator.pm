@@ -6,6 +6,7 @@ package ElasticSearchX::Model::Generator::TypenameTranslator;
 # ABSTRACT: Transform upstream type/document names to downstream Package/Class/File names.
 
 use Moo;
+use Path::Tiny ();
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
@@ -52,8 +53,7 @@ sub translate_to_path {
     Carp::confess("\$basename Path part was 0 characters long:  $package");
   }
   $basename .= '.pm';
-  require Path::Class::Dir;
-  return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst $_ } @words )->file( ucfirst $basename );
+  return Path::Tiny::path( $self->base_dir )->child( map { ucfirst $_ } @words )->child( ucfirst $basename );
 }
 
 =method translate_to_package

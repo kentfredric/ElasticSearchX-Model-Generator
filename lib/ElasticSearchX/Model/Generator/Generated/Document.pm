@@ -6,6 +6,7 @@ package ElasticSearchX::Model::Generator::Generated::Document;
 # ABSTRACT: A Generated C<ESX> Document Model.
 
 use Moo;
+use Path::Tiny ();
 use MooseX::Has::Sugar qw( rw required );
 
 =attr package
@@ -35,8 +36,8 @@ has 'content' => rw, required;
 
 sub write {
   my ( $self, %args ) = @_;
-  my $file = Path::Class::File->new( $self->path );
-  $file->dir->mkpath;
+  my $file = Path::Tiny::path( $self->path );
+  $file->parent->mkpath;
   $file->openw->print( $self->content );
   return;
 }
