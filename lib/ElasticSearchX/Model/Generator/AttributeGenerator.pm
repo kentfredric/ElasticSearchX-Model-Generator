@@ -7,7 +7,7 @@ package ElasticSearchX::Model::Generator::AttributeGenerator;
 
 use 5.10.0;
 use Moo;
-use Data::Dump qw( pp quote );
+use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
 =attr generator_base
@@ -74,6 +74,15 @@ PROP
   return sprintf $property_template, $args[0], $args[1];
 }
 
+sub _s_quote {
+  my ($var)  = shift;
+  my $back   = chr(0x5C);
+  my $escape = chr(0x5C) . chr(0x27);
+  $escape = '[' . $escape . ']';
+  $var =~ s{($escape)}{ $back . $1 }gex;
+  return q{'} . $var . q{'};
+}
+
 =func fill_attribute_template
 
   $string = fill_attribute_template( $attribute_name, $attribute_properties_definition )
@@ -98,7 +107,7 @@ EOF
     chomp $x;
     $x;
   };
-  return sprintf $attribute_template, quote( $args[0] ), $args[1];
+  return sprintf $attribute_template, _s_quote( $args[0] ), $args[1];
 
 }
 
@@ -123,8 +132,8 @@ sub hash_to_proplist {
   my (%hash) = @_;
   my $propdata = join q{}, map {
     defined $hash{$_}
-      ? fill_property_template( quote($_), quote( $hash{$_} ) )
-      : fill_property_template( quote($_), 'undef' )
+      ? fill_property_template( _s_quote($_), _s_quote( $hash{$_} ) )
+      : fill_property_template( _s_quote($_), 'undef' )
   } sort keys %hash;
   chomp $propdata;
   return $propdata;
