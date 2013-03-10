@@ -11,19 +11,19 @@ my %module_build_args = (
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
-    "Module::Build" => "0.4002",
+    "Module::Build" => "0.4003",
     "Moose" => 0,
     "Test::More" => "0.98"
   },
   "configure_requires" => {
-    "Module::Build" => "0.4002"
+    "Module::Build" => "0.4003"
   },
   "dist_abstract" => "Create a suite of ESX::Model classes from an existing mapping.",
   "dist_author" => [
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "ElasticSearchX-Model-Generator",
-  "dist_version" => "0.1.1",
+  "dist_version" => "0.1.2",
   "license" => "perl",
   "module_name" => "ElasticSearchX::Model::Generator",
   "recommends" => {},

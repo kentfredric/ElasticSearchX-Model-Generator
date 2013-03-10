@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::VERSION = '0.1.1';
+  $ElasticSearchX::Model::Generator::VERSION = '0.1.2';
 }
 
 # ABSTRACT: Create a suite of ESX::Model classes from an existing mapping.
@@ -106,13 +106,21 @@ sub _build__mapping_content {
     require Carp;
     Carp::confess( sprintf qq[Failed to fetch mapping:\n\tstatus=%s\n\treason=%s\n], $response->{status}, $response->{reason} );
   }
-  if ( length $response->{content} != $response->{headers}->{'content-length'} ) {
+  if ( exists $response->{headers}->{'content-length'}
+    and length $response->{content} != $response->{headers}->{'content-length'} )
+  {
     require Carp;
     Carp::confess(
       sprintf qq[Content length did not match expected length, _mapping failed to fetch completely.\n\tgot=%s\n\texpected%s\n],
       length $response->{content},
       $response->{headers}->{'Content-Length'}
     );
+  }
+  if ( not exists $response->{headers}->{'content-length'} ) {
+    if ( not exists $response->{headers}->{'transfer-encoding'} or $response->{headers}->{'transfer-encoding'} ne 'chunked' ) {
+      require Carp;
+      Carp::carp(q[No content length and no transfer-encoding=chunked, data could be broken]);
+    }
   }
   return $response->{content};
 }
@@ -178,11 +186,12 @@ sub documents {
   my @documents;
   for my $index (@indices) {
     for my $typename ( $self->type_names($index) ) {
-      push @documents, $self->document_generator->generate(
+      push @documents,
+        $self->document_generator->generate(
         index    => $index,
         typename => $typename,
         typedata => $self->type( $index, $typename ),
-      );
+        );
     }
   }
   return @documents;
@@ -193,6 +202,7 @@ no Moo;
 1;
 
 __END__
+
 =pod
 
 =encoding utf-8
@@ -203,7 +213,7 @@ ElasticSearchX::Model::Generator - Create a suite of ESX::Model classes from an 
 
 =head1 VERSION
 
-version 0.1.1
+version 0.1.2
 
 =head1 SYNOPSIS
 
@@ -238,14 +248,14 @@ this is just a sugar syntax for ESX:M:G->new() you can elect to import to make y
 
   @names = $esmg->index_names
 
-returns the names of all indices specified in the C<_mapping>
+returns the names of all indexes specified in the C<_mapping>
 
 =head2 index
 
-  $data = $esmg->index('') # If indices are not in the dataset
-  $data = $esmg->index('cpan_v1') # if indices are in the dataset
+  $data = $esmg->index('') # If indexes are not in the data set
+  $data = $esmg->index('cpan_v1') # if indexes are in the data set
 
-Returns the dataset nested under the specified index.
+Returns the data set nested under the specified index.
 
 =head2 type_names
 
@@ -273,7 +283,7 @@ Returns the dataset nested under the specified index.
 
 =head2 documents
 
-  @documents = $esmg->documents(); # all documents for all indices
+  @documents = $esmg->documents(); # all documents for all indexes
   @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
   @documents = $esmg->documents(''); # all documents for an index-free dataset.
 
@@ -365,11 +375,11 @@ returns an instance of C<$typename_translator_class>
 
 =head2 _build__mapping_content
 
-returns the content of the url at C<mapping_url>
+returns the content of the URL at C<mapping_url>
 
 =head2 _build__mapping_data
 
-returns the decoded data from JSON stored in C<_mapping_content>
+returns the decoded data from C<JSON> stored in C<_mapping_content>
 
 =head1 AUTHOR
 
@@ -377,10 +387,9 @@ Kent Fredric <kentfredric@gmail.com>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2012 by Kent Fredric <kentfredric@gmail.com>.
+This software is copyright (c) 2013 by Kent Fredric <kentfredric@gmail.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

@@ -3,7 +3,7 @@ NAME
     from an existing mapping.
 
 VERSION
-    version 0.1.1
+    version 0.1.2
 
 SYNOPSIS
       use ElasticSearchX::Model::Generator qw( generate_model );
@@ -35,13 +35,13 @@ METHODS
   index_names
       @names = $esmg->index_names
 
-    returns the names of all indices specified in the "_mapping"
+    returns the names of all indexes specified in the "_mapping"
 
   index
-      $data = $esmg->index('') # If indices are not in the dataset
-      $data = $esmg->index('cpan_v1') # if indices are in the dataset
+      $data = $esmg->index('') # If indexes are not in the data set
+      $data = $esmg->index('cpan_v1') # if indexes are in the data set
 
-    Returns the dataset nested under the specified index.
+    Returns the data set nested under the specified index.
 
   type_names
       @names = $esmg->type_names( $index )
@@ -63,7 +63,7 @@ METHODS
       $property = $esmg->property( $index, $type, $propertyname )
 
   documents
-      @documents = $esmg->documents(); # all documents for all indices
+      @documents = $esmg->documents(); # all documents for all indexes
       @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
       @documents = $esmg->documents(''); # all documents for an index-free dataset.
 
@@ -131,16 +131,16 @@ PRIVATE METHODS
     returns an instance of $typename_translator_class
 
   _build__mapping_content
-    returns the content of the url at "mapping_url"
+    returns the content of the URL at "mapping_url"
 
   _build__mapping_data
-    returns the decoded data from JSON stored in "_mapping_content"
+    returns the decoded data from "JSON" stored in "_mapping_content"
 
 AUTHOR
     Kent Fredric <kentfredric@gmail.com>
 
 COPYRIGHT AND LICENSE
-    This software is copyright (c) 2012 by Kent Fredric
+    This software is copyright (c) 2013 by Kent Fredric
     <kentfredric@gmail.com>.
 
     This is free software; you can redistribute it and/or modify it under
