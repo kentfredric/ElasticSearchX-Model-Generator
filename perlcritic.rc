@@ -1,5 +1,5 @@
 severity = 1
-exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage ProhibitVersionStrings RequireExtendedFormatting RequireDotMatchAnything RequireLineBoundaryMatching ProhibitBuiltinHomonyms ProhibitPunctuationVars
+exclude = RequireTidyCode RequirePodSections ProhibitPostfixControls RequireRcsKeywords RequireExplicitPackage ProhibitVersionStrings RequireExtendedFormatting RequireDotMatchAnything RequireLineBoundaryMatching ProhibitBuiltinHomonyms ProhibitPunctuationVars ProhibitMagicNumbers ProhibitParensWithBuiltins
 include = Moose::ProhibitMultipleWiths Moose::ProhibitNewMethod Moose::RequireCleanNamespace Moose::RequireMakeImmutable
 color = 1
 verbose = 9

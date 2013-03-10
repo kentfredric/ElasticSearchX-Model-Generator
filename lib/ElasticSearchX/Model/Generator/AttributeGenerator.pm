@@ -60,13 +60,14 @@ PROP
 }
 
 sub _s_quote {
-    my ( $var ) = shift;
-    my $back   =  chr( 0x5C );
-    my $escape =  chr( 0x5C ) . chr( 0x27 );
-    $escape = '[' . $escape  . ']';
-    $var =~ s{($escape)}{ $back . $1 }gex;
-    return q{'} . $var . q{'};
+  my ($var)  = shift;
+  my $back   = chr(0x5C);
+  my $escape = chr(0x5C) . chr(0x27);
+  $escape = '[' . $escape . ']';
+  $var =~ s{($escape)}{ $back . $1 }gex;
+  return q{'} . $var . q{'};
 }
+
 
 sub fill_attribute_template {
   my (@args) = @_;

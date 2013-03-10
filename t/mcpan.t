@@ -13,7 +13,6 @@ my $instance = generate_model(
 );
 use Data::Dump qw( pp );
 for my $document ( $instance->documents() ) {
-  $document->write();
   $document->evaluate();
   pass( "Loaded a generated document : " . $document->package );
 }
