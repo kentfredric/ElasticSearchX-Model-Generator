@@ -23,7 +23,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "ElasticSearchX-Model-Generator",
-  "dist_version" => "0.1.2",
+  "dist_version" => "0.1.3",
   "license" => "perl",
   "module_name" => "ElasticSearchX::Model::Generator",
   "recommends" => {},
@@ -36,7 +36,7 @@ my %module_build_args = (
     "Module::Runtime" => 0,
     "Moo" => 0,
     "MooseX::Has::Sugar" => 0,
-    "Path::Class::Dir" => 0,
+    "Path::Tiny" => 0,
     "Scalar::Util" => 0,
     "Sub::Exporter" => 0,
     "Sub::Quote" => 0,
