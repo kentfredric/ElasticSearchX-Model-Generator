@@ -1,6 +1,16 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
 {{$NEXT}}
+ [!Noteworthy Changes]
+ - Moved from Path::Class to Path::Tiny
+ - Emit generated attributes with single-quote keys.
+ - Add a #ABSTRACT declaration to all generated files
+
+ [Dependencies::New / runtime requires]
+ - Path::Tiny
+
+ [Dependencies::Removed / runtime requires]
+ - Path::Class::Dir
 
 0.1.2 2013-03-10T00:14:03Z
  [Bugs]
