@@ -214,7 +214,7 @@ sub _build_typename_translator {
 
 =p_method _build__mapping_content
 
-returns the content of the url at C<mapping_url>
+returns the content of the URL at C<mapping_url>
 
 =cut
 
@@ -238,7 +238,7 @@ sub _build__mapping_content {
   if ( not exists $response->{headers}->{'content-length'} ) {
     if ( not exists $response->{headers}->{'transfer-encoding'} or $response->{headers}->{'transfer-encoding'} ne 'chunked' ) {
       require Carp;
-      Carp::carp(qq[No content length and no transfer-encoding=chunked, data could be broken]);
+      Carp::carp(q[No content length and no transfer-encoding=chunked, data could be broken]);
     }
   }
   return $response->{content};
@@ -246,7 +246,7 @@ sub _build__mapping_content {
 
 =p_method _build__mapping_data
 
-returns the decoded data from JSON stored in C<_mapping_content>
+returns the decoded data from C<JSON> stored in C<_mapping_content>
 
 =cut
 
@@ -261,7 +261,7 @@ sub _build__mapping_data {
 
   @names = $esmg->index_names
 
-returns the names of all indices specified in the C<_mapping>
+returns the names of all indexes specified in the C<_mapping>
 
 =cut
 
@@ -272,10 +272,10 @@ sub index_names {
 
 =method index
 
-  $data = $esmg->index('') # If indices are not in the dataset
-  $data = $esmg->index('cpan_v1') # if indices are in the dataset
+  $data = $esmg->index('') # If indexes are not in the data set
+  $data = $esmg->index('cpan_v1') # if indexes are in the data set
 
-Returns the dataset nested under the specified index.
+Returns the data set nested under the specified index.
 
 =cut
 
@@ -347,7 +347,7 @@ sub property {
 
 =method documents
 
-  @documents = $esmg->documents(); # all documents for all indices
+  @documents = $esmg->documents(); # all documents for all indexes
   @documents = $esmg->documents('cpan_v1'); # all documents for cpan_v1
   @documents = $esmg->documents(''); # all documents for an index-free dataset.
 

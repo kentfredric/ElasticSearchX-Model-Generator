@@ -3,7 +3,7 @@ use warnings;
 
 package ElasticSearchX::Model::Generator::DocumentGenerator;
 
-# ABSTRACT: Moose Class generation backend for Documents/Types.
+# ABSTRACT: Moose Class generation back end for Documents/Types.
 
 use 5.10.0;
 use Moo;

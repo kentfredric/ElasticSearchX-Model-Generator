@@ -3,7 +3,7 @@ use warnings;
 
 package ElasticSearchX::Model::Generator::Generated::Document;
 
-# ABSTRACT: A Generated ESX Document Model.
+# ABSTRACT: A Generated C<ESX> Document Model.
 
 use Moo;
 use MooseX::Has::Sugar qw( rw required );
