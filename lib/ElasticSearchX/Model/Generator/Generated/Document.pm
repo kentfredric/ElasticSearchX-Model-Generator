@@ -6,12 +6,13 @@ BEGIN {
   $ElasticSearchX::Model::Generator::Generated::Document::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::Generated::Document::VERSION = '0.1.2';
+  $ElasticSearchX::Model::Generator::Generated::Document::VERSION = '0.1.3';
 }
 
 # ABSTRACT: A Generated C<ESX> Document Model.
 
 use Moo;
+use Path::Tiny ();
 use MooseX::Has::Sugar qw( rw required );
 
 
@@ -22,8 +23,8 @@ has 'content' => rw, required;
 
 sub write {
   my ( $self, %args ) = @_;
-  my $file = Path::Class::File->new( $self->path );
-  $file->dir->mkpath;
+  my $file = Path::Tiny::path( $self->path );
+  $file->parent->mkpath;
   $file->openw->print( $self->content );
   return;
 }
@@ -61,7 +62,7 @@ ElasticSearchX::Model::Generator::Generated::Document - A Generated C<ESX> Docum
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 METHODS
 

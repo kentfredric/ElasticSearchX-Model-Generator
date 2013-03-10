@@ -6,14 +6,14 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AttributeGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.2';
+  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.3';
 }
 
 # ABSTRACT: Generator that emits 'has' declarations for type properties.
 
 use 5.10.0;
 use Moo;
-use Data::Dump qw( pp quote );
+use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
 
@@ -59,6 +59,15 @@ PROP
   return sprintf $property_template, $args[0], $args[1];
 }
 
+sub _s_quote {
+  my ($var)  = shift;
+  my $back   = chr(0x5C);
+  my $escape = chr(0x5C) . chr(0x27);
+  $escape = '[' . $escape . ']';
+  $var =~ s{($escape)}{ $back . $1 }gex;
+  return q{'} . $var . q{'};
+}
+
 
 sub fill_attribute_template {
   my (@args) = @_;
@@ -72,7 +81,7 @@ EOF
     chomp $x;
     $x;
   };
-  return sprintf $attribute_template, quote( $args[0] ), $args[1];
+  return sprintf $attribute_template, _s_quote( $args[0] ), $args[1];
 
 }
 
@@ -81,8 +90,8 @@ sub hash_to_proplist {
   my (%hash) = @_;
   my $propdata = join q{}, map {
     defined $hash{$_}
-      ? fill_property_template( quote($_), quote( $hash{$_} ) )
-      : fill_property_template( quote($_), 'undef' )
+      ? fill_property_template( _s_quote($_), _s_quote( $hash{$_} ) )
+      : fill_property_template( _s_quote($_), 'undef' )
   } sort keys %hash;
   chomp $propdata;
   return $propdata;
@@ -157,7 +166,7 @@ ElasticSearchX::Model::Generator::AttributeGenerator - Generator that emits 'has
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 METHODS
 

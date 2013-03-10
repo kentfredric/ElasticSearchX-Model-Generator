@@ -22,22 +22,22 @@ name: ElasticSearchX-Model-Generator
 provides:
   ElasticSearchX::Model::Generator:
     file: lib/ElasticSearchX/Model/Generator.pm
-    version: v0.1.2
+    version: v0.1.3
   ElasticSearchX::Model::Generator::AttributeGenerator:
     file: lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm
-    version: v0.1.2
+    version: v0.1.3
   ElasticSearchX::Model::Generator::DocumentGenerator:
     file: lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm
-    version: v0.1.2
+    version: v0.1.3
   ElasticSearchX::Model::Generator::Generated::Attribute:
     file: lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm
-    version: v0.1.2
+    version: v0.1.3
   ElasticSearchX::Model::Generator::Generated::Document:
     file: lib/ElasticSearchX/Model/Generator/Generated/Document.pm
-    version: v0.1.2
+    version: v0.1.3
   ElasticSearchX::Model::Generator::TypenameTranslator:
     file: lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm
-    version: v0.1.2
+    version: v0.1.3
 requires:
   Carp: 0
   Data::Dump: 0
@@ -46,7 +46,7 @@ requires:
   Module::Runtime: 0
   Moo: 0
   MooseX::Has::Sugar: 0
-  Path::Class::Dir: 0
+  Path::Tiny: 0
   Scalar::Util: 0
   Sub::Exporter: 0
   Sub::Quote: 0
@@ -57,14 +57,14 @@ resources:
   bugtracker: https://github.com/kentfredric/ElasticSearchX-Model-Generator/issues
   homepage: https://github.com/kentfredric/ElasticSearchX-Model-Generator
   repository: https://github.com/kentfredric/ElasticSearchX-Model-Generator.git
-version: 0.1.2
+version: 0.1.3
 x_BuiltWith:
   modules:
     Carp: 1.28
     Data::Dump: 1.21
     Dist::Zilla::PluginBundle::Author::KENTNL: 1.7.0
     Dist::Zilla::PluginBundle::Author::KENTNL::Lite: 'NA(possibly not installed)'
-    ElasticSearchX::Model::Document: 0.1.4
+    ElasticSearchX::Model::Document: 0.1.3
     File::Find: 1.23
     File::Temp: 0.22_90
     FindBin: 1.51
@@ -75,7 +75,7 @@ x_BuiltWith:
     Moo: 1.000008
     Moose: 2.0604
     MooseX::Has::Sugar: 0.05070421
-    Path::Class::Dir: 0.31
+    Path::Tiny: 0.013
     Pod::Coverage::TrustPod: 0.100002
     Scalar::Util: 1.27
     Sub::Exporter: 0.985

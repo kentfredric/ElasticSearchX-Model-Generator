@@ -6,12 +6,13 @@ BEGIN {
   $ElasticSearchX::Model::Generator::TypenameTranslator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::TypenameTranslator::VERSION = '0.1.2';
+  $ElasticSearchX::Model::Generator::TypenameTranslator::VERSION = '0.1.3';
 }
 
 # ABSTRACT: Transform upstream type/document names to downstream Package/Class/File names.
 
 use Moo;
+use Path::Tiny ();
 use Data::Dump qw( pp );
 use MooseX::Has::Sugar qw( rw required weak_ref );
 
@@ -42,8 +43,7 @@ sub translate_to_path {
     Carp::confess("\$basename Path part was 0 characters long:  $package");
   }
   $basename .= '.pm';
-  require Path::Class::Dir;
-  return Path::Class::Dir->new( $self->base_dir )->subdir( map { ucfirst $_ } @words )->file( ucfirst $basename );
+  return Path::Tiny::path( $self->base_dir )->child( map { ucfirst $_ } @words )->child( ucfirst $basename );
 }
 
 
@@ -68,7 +68,7 @@ ElasticSearchX::Model::Generator::TypenameTranslator - Transform upstream type/d
 
 =head1 VERSION
 
-version 0.1.2
+version 0.1.3
 
 =head1 METHODS
 
