@@ -34,6 +34,9 @@ sub generate {
 package %s;
 use strict;
 use warnings FATAL => 'all';
+
+# ABSTRACT: Generated model for %s
+
 use Moose;
 use ElasticSearchX::Model::Document;
 
@@ -64,7 +67,7 @@ EOF
   return ElasticSearchX::Model::Generator::Generated::Document->new(
     package => $class,
     path    => $path,
-    content => ( sprintf $document_template, $class, join qq{\n}, map { $_->content } @attributes ),
+    content => ( sprintf $document_template, $class, $args{typename}, join qq{\n}, map { $_->content } @attributes ),
   );
 }
 
