@@ -1,6 +1,8 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
 {{$NEXT}}
+
+0.1.2 2013-03-10T00:14:03Z
  [Bugs]
  - support `transfer-encoding=chunked`
 
