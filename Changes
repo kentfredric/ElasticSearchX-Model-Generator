@@ -1,5 +1,7 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
+0.1.4 2013-03-11T00:16:31Z
+
 0.1.3 2013-03-10T09:25:43Z
  [!Noteworthy Changes]
  - Moved from Path::Class to Path::Tiny

@@ -22,22 +22,22 @@ name: ElasticSearchX-Model-Generator
 provides:
   ElasticSearchX::Model::Generator:
     file: lib/ElasticSearchX/Model/Generator.pm
-    version: v0.1.3
+    version: v0.1.4
   ElasticSearchX::Model::Generator::AttributeGenerator:
     file: lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm
-    version: v0.1.3
+    version: v0.1.4
   ElasticSearchX::Model::Generator::DocumentGenerator:
     file: lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm
-    version: v0.1.3
+    version: v0.1.4
   ElasticSearchX::Model::Generator::Generated::Attribute:
     file: lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm
-    version: v0.1.3
+    version: v0.1.4
   ElasticSearchX::Model::Generator::Generated::Document:
     file: lib/ElasticSearchX/Model/Generator/Generated/Document.pm
-    version: v0.1.3
+    version: v0.1.4
   ElasticSearchX::Model::Generator::TypenameTranslator:
     file: lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm
-    version: v0.1.3
+    version: v0.1.4
 requires:
   Carp: 0
   Data::Dump: 0
@@ -57,7 +57,7 @@ resources:
   bugtracker: https://github.com/kentfredric/ElasticSearchX-Model-Generator/issues
   homepage: https://github.com/kentfredric/ElasticSearchX-Model-Generator
   repository: https://github.com/kentfredric/ElasticSearchX-Model-Generator.git
-version: 0.1.3
+version: 0.1.4
 x_BuiltWith:
   modules:
     Carp: 1.28
