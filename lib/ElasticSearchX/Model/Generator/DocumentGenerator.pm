@@ -31,9 +31,10 @@ has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_genera
 sub generate {
   my ( $self, %args ) = @_;
   state $document_template = <<'EOF';
-package %s;
 use strict;
 use warnings FATAL => 'all';
+
+package %s;
 
 # ABSTRACT: Generated model for %s
 
