@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::DocumentGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.3';
+  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.4';
 }
 
 # ABSTRACT: Moose Class generation back end for Documents/Types.
@@ -23,9 +23,10 @@ has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_genera
 sub generate {
   my ( $self, %args ) = @_;
   state $document_template = <<'EOF';
-package %s;
 use strict;
 use warnings FATAL => 'all';
+
+package %s;
 
 # ABSTRACT: Generated model for %s
 
@@ -79,7 +80,7 @@ ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation bac
 
 =head1 VERSION
 
-version 0.1.3
+version 0.1.4
 
 =head1 METHODS
 
