@@ -1,6 +1,8 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
 {{$NEXT}}
+
+0.1.5 2013-03-13T09:54:53Z
  [!Noteworthy Changes]
  - Refactored templating parts to be easier to override
 
