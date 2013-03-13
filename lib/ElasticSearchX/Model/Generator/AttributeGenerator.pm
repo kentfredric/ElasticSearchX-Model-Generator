@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AttributeGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.4';
+  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.5';
 }
 
 # ABSTRACT: Generator that emits 'has' declarations for type properties.
@@ -51,16 +51,18 @@ sub expand_type {
 }
 
 
+
+sub _property_template_string {
+  return state $property_template = qq{    %-30s => %s,\n};
+}
+
 sub fill_property_template {
-  my (@args) = @_;
-  state $property_template = <<'PROP';
-    %-30s => %s,
-PROP
-  return sprintf $property_template, $args[0], $args[1];
+  my ( $self, @args ) = @_;
+  return sprintf $self->_property_template_string, $args[0], $args[1];
 }
 
 sub _s_quote {
-  my ($var)  = shift;
+  my ( $self, $var ) = @_;
   my $back   = chr(0x5C);
   my $escape = chr(0x5C) . chr(0x27);
   $escape = '[' . $escape . ']';
@@ -69,29 +71,24 @@ sub _s_quote {
 }
 
 
-sub fill_attribute_template {
-  my (@args) = @_;
 
-  state $attribute_template = do {
-    my $x = <<'EOF';
-has %-30s => (
-%s
-);
-EOF
-    chomp $x;
-    $x;
-  };
-  return sprintf $attribute_template, _s_quote( $args[0] ), $args[1];
+sub _attribute_template_string {
+  return state $attribute_template = qq{has %-30s => (\n%s\n);};
+}
+
+sub fill_attribute_template {
+  my ( $self, @args ) = @_;
+  return sprintf $self->_attribute_template_string, $self->_s_quote( $args[0] ), $args[1];
 
 }
 
 
 sub hash_to_proplist {
-  my (%hash) = @_;
+  my ( $self, %hash ) = @_;
   my $propdata = join q{}, map {
     defined $hash{$_}
-      ? fill_property_template( _s_quote($_), _s_quote( $hash{$_} ) )
-      : fill_property_template( _s_quote($_), 'undef' )
+      ? $self->fill_property_template( $self->_s_quote($_), $self->_s_quote( $hash{$_} ) )
+      : $self->fill_property_template( $self->_s_quote($_), 'undef' )
   } sort keys %hash;
   chomp $propdata;
   return $propdata;
@@ -148,7 +145,7 @@ sub generate {
 
   require ElasticSearchX::Model::Generator::Generated::Attribute;
   return ElasticSearchX::Model::Generator::Generated::Attribute->new(
-    content => $prefix . fill_attribute_template( $args{propertyname}, hash_to_proplist(%properties) ) );
+    content => $prefix . $self->fill_attribute_template( $args{propertyname}, $self->hash_to_proplist(%properties) ) );
 }
 
 no Moo;
@@ -166,9 +163,28 @@ ElasticSearchX::Model::Generator::AttributeGenerator - Generator that emits 'has
 
 =head1 VERSION
 
-version 0.1.4
+version 0.1.5
 
 =head1 METHODS
+
+=head2 fill_property_template
+
+  $string = $object->fill_property_template( $property_name, $property_value )
+
+  my $data = $object->fill_property_template( foo => 'bar' );
+  # $data == "    foo                         => bar,\n"
+  my $data = $object->fill_property_template(quote( 'foo' ) => quote( 'bar' ));
+  # $data == "    \"foo\"                       => \"bar\",\n"
+
+=head2 fill_attribute_template
+
+  $string = $object->fill_attribute_template( $attribute_name, $attribute_properties_definition )
+
+  my $data = $object->fill_attribute_template( foo => '    is => rw =>, ' );
+  # $data ==
+  # has "foo"              => (
+  #     is => rw =>,
+  # );
 
 =head2 generate
 
@@ -194,25 +210,6 @@ version 0.1.4
   %attr = ( %attr, expand_type( $type ) );
   %attr = ( %attr, expand_type( 'boolean' ) );
 
-=head2 fill_property_template
-
-  $string = fill_property_template( $property_name, $property_value )
-
-  my $data = fill_property_template( foo => 'bar' );
-  # $data == "    foo                         => bar,\n"
-  my $data = fill_property_template(quote( 'foo' ) => quote( 'bar' ));
-  # $data == "    \"foo\"                       => \"bar\",\n"
-
-=head2 fill_attribute_template
-
-  $string = fill_attribute_template( $attribute_name, $attribute_properties_definition )
-
-  my $data = fill_attribute_template( foo => '    is => rw =>, ' );
-  # $data ==
-  # has "foo"              => (
-  #     is => rw =>,
-  # );
-
 =head2 hash_to_proplist
 
   $string = hash_to_proplist( %hash )
@@ -227,6 +224,12 @@ version 0.1.4
   # "required" => "1",
   # "foo" => undef,
   # EOF
+
+=head1 PRIVATE METHODS
+
+=head2 _property_template_string
+
+=head2 _attribute_template_string
 
 =head1 AUTHOR
 

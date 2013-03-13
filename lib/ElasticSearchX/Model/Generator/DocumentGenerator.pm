@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::DocumentGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.4';
+  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.5';
 }
 
 # ABSTRACT: Moose Class generation back end for Documents/Types.
@@ -22,25 +22,6 @@ has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_genera
 
 sub generate {
   my ( $self, %args ) = @_;
-  state $document_template = <<'EOF';
-use strict;
-use warnings FATAL => 'all';
-
-package %s;
-
-# ABSTRACT: Generated model for %s
-
-use Moose;
-use ElasticSearchX::Model::Document;
-
-%s
-
-no Moose;
-__PACKAGE__->meta->make_immutable;
-
-1;
-
-EOF
 
   my $class = $self->typename_translator->translate_to_package( typename => $args{typename} );
   my $path = $self->typename_translator->translate_to_path( typename => $args{typename} );
@@ -60,8 +41,46 @@ EOF
   return ElasticSearchX::Model::Generator::Generated::Document->new(
     package => $class,
     path    => $path,
-    content => ( sprintf $document_template, $class, $args{typename}, join qq{\n}, map { $_->content } @attributes ),
+    content => $self->_fill_template(
+      class      => $class,
+      typename   => $args{typename},
+      attributes => ( join qq{\n}, map { $_->content } @attributes )
+    ),
   );
+}
+
+
+sub _template_string {
+  return state $document_template = <<'EOF';
+use strict;
+use warnings FATAL => 'all';
+
+package %s;
+
+# ABSTRACT: Generated model for %s
+
+use Moose;
+use ElasticSearchX::Model::Document;
+
+%s
+
+no Moose;
+__PACKAGE__->meta->make_immutable;
+
+1;
+
+EOF
+
+}
+
+
+sub _fill_template {
+  my ( $self, %args ) = @_;
+  return sprintf
+    $self->_template_string,
+    $args{class},
+    $args{typename},
+    $args{attributes};
 }
 
 no Moo;
@@ -80,7 +99,7 @@ ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation bac
 
 =head1 VERSION
 
-version 0.1.4
+version 0.1.5
 
 =head1 METHODS
 
@@ -97,6 +116,12 @@ version 0.1.4
 =head2 generator_base
 
   rw, required, weak_ref
+
+=head1 PRIVATE METHODS
+
+=head2 _template_string
+
+=head2 _fill_template
 
 =head1 AUTHOR
 
