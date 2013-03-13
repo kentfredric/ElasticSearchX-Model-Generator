@@ -72,27 +72,27 @@
    "provides" : {
       "ElasticSearchX::Model::Generator" : {
          "file" : "lib/ElasticSearchX/Model/Generator.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       },
       "ElasticSearchX::Model::Generator::AttributeGenerator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       },
       "ElasticSearchX::Model::Generator::DocumentGenerator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       },
       "ElasticSearchX::Model::Generator::Generated::Attribute" : {
          "file" : "lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       },
       "ElasticSearchX::Model::Generator::Generated::Document" : {
          "file" : "lib/ElasticSearchX/Model/Generator/Generated/Document.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       },
       "ElasticSearchX::Model::Generator::TypenameTranslator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm",
-         "version" : "v0.1.5"
+         "version" : "v0.1.6"
       }
    },
    "release_status" : "stable",
@@ -107,7 +107,7 @@
          "web" : "https://github.com/kentfredric/ElasticSearchX-Model-Generator"
       }
    },
-   "version" : "0.1.5",
+   "version" : "0.1.6",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.28",
@@ -166,7 +166,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Git::NextVersion",
             "name" : "@Author::KENTNL/Git::NextVersion",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::MetaConfig",
@@ -208,7 +208,7 @@
          {
             "class" : "Dist::Zilla::Plugin::Git::GatherDir",
             "name" : "@Author::KENTNL/Git::GatherDir",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::License",
@@ -391,27 +391,27 @@
          {
             "class" : "Dist::Zilla::Plugin::Git::Check",
             "name" : "@Author::KENTNL/Git::Check",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
             "name" : "@Author::KENTNL/Git::Tag/tag_master",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Commit",
             "name" : "@Author::KENTNL/Git::Commit",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::CommitBuild",
             "name" : "@Author::KENTNL/Git::CommitBuild",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::Git::Tag",
             "name" : "@Author::KENTNL/Git::Tag/tag_release",
-            "version" : "2.009"
+            "version" : "2.010"
          },
          {
             "class" : "Dist::Zilla::Plugin::UploadToCPAN",

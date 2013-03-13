@@ -23,7 +23,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "ElasticSearchX-Model-Generator",
-  "dist_version" => "0.1.5",
+  "dist_version" => "0.1.6",
   "license" => "perl",
   "module_name" => "ElasticSearchX::Model::Generator",
   "recommends" => {},
