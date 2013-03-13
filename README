@@ -3,7 +3,7 @@ NAME
     from an existing mapping.
 
 VERSION
-    version 0.1.4
+    version 0.1.5
 
 SYNOPSIS
       use ElasticSearchX::Model::Generator qw( generate_model );

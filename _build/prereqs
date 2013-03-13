@@ -1,30 +1,30 @@
 do{ my $x = {
-       'requires' => {
-                       'Data::Dump' => 0,
-                       'strict' => 0,
-                       'Path::Tiny' => 0,
-                       'JSON' => 0,
-                       'Moo' => 0,
-                       'Sub::Exporter' => 0,
-                       'perl' => 'v5.10.0',
-                       'MooseX::Has::Sugar' => 0,
-                       'warnings' => 0,
-                       'Sub::Quote' => 0,
-                       'Scalar::Util' => 0,
-                       'HTTP::Tiny' => 0,
-                       'Module::Runtime' => 0,
-                       'Carp' => 0
-                     },
-       'recommends' => {},
-       'conflicts' => {},
        'build_requires' => {
+                             'Module::Build' => '0.4003',
                              'File::Find' => 0,
+                             'ElasticSearchX::Model::Document' => 0,
+                             'Test::More' => '0.98',
                              'FindBin' => 0,
                              'Moose' => 0,
-                             'File::Temp' => 0,
-                             'Test::More' => '0.98',
-                             'Module::Build' => '0.4003',
-                             'ElasticSearchX::Model::Document' => 0
-                           }
+                             'File::Temp' => 0
+                           },
+       'requires' => {
+                       'perl' => 'v5.10.0',
+                       'JSON' => 0,
+                       'Data::Dump' => 0,
+                       'Sub::Exporter' => 0,
+                       'Moo' => 0,
+                       'Module::Runtime' => 0,
+                       'Scalar::Util' => 0,
+                       'Carp' => 0,
+                       'MooseX::Has::Sugar' => 0,
+                       'Sub::Quote' => 0,
+                       'HTTP::Tiny' => 0,
+                       'strict' => 0,
+                       'warnings' => 0,
+                       'Path::Tiny' => 0
+                     },
+       'recommends' => {},
+       'conflicts' => {}
      };
 $x; }

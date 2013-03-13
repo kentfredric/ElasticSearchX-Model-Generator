@@ -142,9 +142,30 @@
 ElasticSearchX::Model::Generator::AttributeGenerator \- Generator that emits 'has' declarations for type properties.
 .SH "VERSION"
 .IX Header "VERSION"
-version 0.1.4
+version 0.1.5
 .SH "METHODS"
 .IX Header "METHODS"
+.SS "fill_property_template"
+.IX Subsection "fill_property_template"
+.Vb 1
+\&  $string = $object\->fill_property_template( $property_name, $property_value )
+\&
+\&  my $data = $object\->fill_property_template( foo => \*(Aqbar\*(Aq );
+\&  # $data == "    foo                         => bar,\en"
+\&  my $data = $object\->fill_property_template(quote( \*(Aqfoo\*(Aq ) => quote( \*(Aqbar\*(Aq ));
+\&  # $data == "    \e"foo\e"                       => \e"bar\e",\en"
+.Ve
+.SS "fill_attribute_template"
+.IX Subsection "fill_attribute_template"
+.Vb 1
+\&  $string = $object\->fill_attribute_template( $attribute_name, $attribute_properties_definition )
+\&
+\&  my $data = $object\->fill_attribute_template( foo => \*(Aq    is => rw =>, \*(Aq );
+\&  # $data ==
+\&  # has "foo"              => (
+\&  #     is => rw =>,
+\&  # );
+.Ve
 .SS "generate"
 .IX Subsection "generate"
 .Vb 6
@@ -172,27 +193,6 @@ version 0.1.4
 \&  %attr = ( %attr, expand_type( $type ) );
 \&  %attr = ( %attr, expand_type( \*(Aqboolean\*(Aq ) );
 .Ve
-.SS "fill_property_template"
-.IX Subsection "fill_property_template"
-.Vb 1
-\&  $string = fill_property_template( $property_name, $property_value )
-\&
-\&  my $data = fill_property_template( foo => \*(Aqbar\*(Aq );
-\&  # $data == "    foo                         => bar,\en"
-\&  my $data = fill_property_template(quote( \*(Aqfoo\*(Aq ) => quote( \*(Aqbar\*(Aq ));
-\&  # $data == "    \e"foo\e"                       => \e"bar\e",\en"
-.Ve
-.SS "fill_attribute_template"
-.IX Subsection "fill_attribute_template"
-.Vb 1
-\&  $string = fill_attribute_template( $attribute_name, $attribute_properties_definition )
-\&
-\&  my $data = fill_attribute_template( foo => \*(Aq    is => rw =>, \*(Aq );
-\&  # $data ==
-\&  # has "foo"              => (
-\&  #     is => rw =>,
-\&  # );
-.Ve
 .SS "hash_to_proplist"
 .IX Subsection "hash_to_proplist"
 .Vb 1
@@ -209,6 +209,12 @@ version 0.1.4
 \&  # "foo" => undef,
 \&  # EOF
 .Ve
+.SH "PRIVATE METHODS"
+.IX Header "PRIVATE METHODS"
+.SS "_property_template_string"
+.IX Subsection "_property_template_string"
+.SS "_attribute_template_string"
+.IX Subsection "_attribute_template_string"
 .SH "AUTHOR"
 .IX Header "AUTHOR"
 Kent Fredric <kentfredric@gmail.com>
