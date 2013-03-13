@@ -30,25 +30,6 @@ has 'generator_base' => rw, required, weak_ref, handles => [qw( attribute_genera
 
 sub generate {
   my ( $self, %args ) = @_;
-  state $document_template = <<'EOF';
-use strict;
-use warnings FATAL => 'all';
-
-package %s;
-
-# ABSTRACT: Generated model for %s
-
-use Moose;
-use ElasticSearchX::Model::Document;
-
-%s
-
-no Moose;
-__PACKAGE__->meta->make_immutable;
-
-1;
-
-EOF
 
   my $class = $self->typename_translator->translate_to_package( typename => $args{typename} );
   my $path = $self->typename_translator->translate_to_path( typename => $args{typename} );
@@ -68,8 +49,52 @@ EOF
   return ElasticSearchX::Model::Generator::Generated::Document->new(
     package => $class,
     path    => $path,
-    content => ( sprintf $document_template, $class, $args{typename}, join qq{\n}, map { $_->content } @attributes ),
+    content => $self->_fill_template(
+      class      => $class,
+      typename   => $args{typename},
+      attributes => ( join qq{\n}, map { $_->content } @attributes )
+    ),
   );
+}
+
+=p_method _template_string
+
+=cut
+
+sub _template_string {
+  return state $document_template = <<'EOF';
+use strict;
+use warnings FATAL => 'all';
+
+package %s;
+
+# ABSTRACT: Generated model for %s
+
+use Moose;
+use ElasticSearchX::Model::Document;
+
+%s
+
+no Moose;
+__PACKAGE__->meta->make_immutable;
+
+1;
+
+EOF
+
+}
+
+=p_method _fill_template
+
+=cut
+
+sub _fill_template {
+  my ( $self, %args ) = @_;
+  return sprintf
+    $self->_template_string,
+    $args{class},
+    $args{typename},
+    $args{attributes};
 }
 
 no Moo;

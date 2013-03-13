@@ -55,27 +55,32 @@ sub expand_type {
   }
 }
 
-=func fill_property_template
+=method fill_property_template
 
-  $string = fill_property_template( $property_name, $property_value )
+  $string = $object->fill_property_template( $property_name, $property_value )
 
-  my $data = fill_property_template( foo => 'bar' );
+  my $data = $object->fill_property_template( foo => 'bar' );
   # $data == "    foo                         => bar,\n"
-  my $data = fill_property_template(quote( 'foo' ) => quote( 'bar' ));
+  my $data = $object->fill_property_template(quote( 'foo' ) => quote( 'bar' ));
   # $data == "    \"foo\"                       => \"bar\",\n"
 
 =cut
 
+=p_method _property_template_string
+
+=cut
+
+sub _property_template_string {
+  return state $property_template = qq{    %-30s => %s,\n};
+}
+
 sub fill_property_template {
-  my (@args) = @_;
-  state $property_template = <<'PROP';
-    %-30s => %s,
-PROP
-  return sprintf $property_template, $args[0], $args[1];
+  my ( $self, @args ) = @_;
+  return sprintf $self->_property_template_string, $args[0], $args[1];
 }
 
 sub _s_quote {
-  my ($var)  = shift;
+  my ( $self, $var ) = @_;
   my $back   = chr(0x5C);
   my $escape = chr(0x5C) . chr(0x27);
   $escape = '[' . $escape . ']';
@@ -83,11 +88,11 @@ sub _s_quote {
   return q{'} . $var . q{'};
 }
 
-=func fill_attribute_template
+=method fill_attribute_template
 
-  $string = fill_attribute_template( $attribute_name, $attribute_properties_definition )
+  $string = $object->fill_attribute_template( $attribute_name, $attribute_properties_definition )
 
-  my $data = fill_attribute_template( foo => '    is => rw =>, ' );
+  my $data = $object->fill_attribute_template( foo => '    is => rw =>, ' );
   # $data ==
   # has "foo"              => (
   #     is => rw =>,
@@ -95,19 +100,17 @@ sub _s_quote {
 
 =cut
 
-sub fill_attribute_template {
-  my (@args) = @_;
+=p_method _attribute_template_string
 
-  state $attribute_template = do {
-    my $x = <<'EOF';
-has %-30s => (
-%s
-);
-EOF
-    chomp $x;
-    $x;
-  };
-  return sprintf $attribute_template, _s_quote( $args[0] ), $args[1];
+=cut
+
+sub _attribute_template_string {
+  return state $attribute_template = qq{has %-30s => (\n%s\n);};
+}
+
+sub fill_attribute_template {
+  my ( $self, @args ) = @_;
+  return sprintf $self->_attribute_template_string, $self->_s_quote( $args[0] ), $args[1];
 
 }
 
@@ -129,11 +132,11 @@ EOF
 =cut
 
 sub hash_to_proplist {
-  my (%hash) = @_;
+  my ( $self, %hash ) = @_;
   my $propdata = join q{}, map {
     defined $hash{$_}
-      ? fill_property_template( _s_quote($_), _s_quote( $hash{$_} ) )
-      : fill_property_template( _s_quote($_), 'undef' )
+      ? $self->fill_property_template( $self->_s_quote($_), $self->_s_quote( $hash{$_} ) )
+      : $self->fill_property_template( $self->_s_quote($_), 'undef' )
   } sort keys %hash;
   chomp $propdata;
   return $propdata;
@@ -202,7 +205,7 @@ sub generate {
 
   require ElasticSearchX::Model::Generator::Generated::Attribute;
   return ElasticSearchX::Model::Generator::Generated::Attribute->new(
-    content => $prefix . fill_attribute_template( $args{propertyname}, hash_to_proplist(%properties) ) );
+    content => $prefix . $self->fill_attribute_template( $args{propertyname}, $self->hash_to_proplist(%properties) ) );
 }
 
 no Moo;
