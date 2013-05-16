@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::AttributeGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.5';
+  $ElasticSearchX::Model::Generator::AttributeGenerator::VERSION = '0.1.6';
 }
 
 # ABSTRACT: Generator that emits 'has' declarations for type properties.
@@ -95,57 +95,81 @@ sub hash_to_proplist {
 }
 
 
+sub _inflate_attribute {
+  my ( $self, %config ) = @_;
+  my $content = $config{prefix};
+  $content .= $self->fill_attribute_template( $config{propertyname}, $self->hash_to_proplist( %{ $config{properties} } ) );
+  require ElasticSearchX::Model::Generator::Generated::Attribute;
+  return ElasticSearchX::Model::Generator::Generated::Attribute->new( content => $content );
+}
+
+
+sub _cleanup_properties {
+  my ( $self, %properties_in ) = @_;
+
+  my %properties = ();
+
+  my $passthrough = sub {
+    my $name = shift;
+    my $d    = $properties_in{$name};
+    $properties{$name} = $properties_in{$name};
+  };
+  my $bool_passthrough = sub {
+    my $name = shift;
+    my $d    = $properties_in{$name};
+    require Scalar::Util;
+    if ( Scalar::Util::blessed($d) and Scalar::Util::blessed($d) eq 'JSON::XS::Boolean' ) {
+      $properties{$name} = ( $d ? 1 : undef );
+      return;
+    }
+    if ( $d eq 'true' or $d eq 'false' ) {
+      $properties{$name} = ( $d eq 'true' ? 1 : undef );
+      return;
+    }
+    $properties{$name} = $properties_in{$name};
+  };
+  my $type_passthrough = sub {
+    my $name = shift;
+    my $d    = $properties_in{$name};
+    %properties = ( %properties, expand_type($d) );
+  };
+  my %passthrough_fields = (
+    store             => $passthrough,
+    boost             => $passthrough,
+    index             => $passthrough,
+    dynamic           => $bool_passthrough,
+    analyzer          => $bool_passthrough,
+    include_in_all    => $passthrough,
+    include_in_parent => $passthrough,
+    include_in_root   => $bool_passthrough,
+    term_vector       => $passthrough,
+    not_analyzed      => $passthrough,
+    type              => $type_passthrough,
+  );
+  for my $propname ( keys %passthrough_fields ) {
+    next unless exists $properties_in{$propname};
+    $passthrough_fields{$propname}->($propname);
+  }
+  return %properties;
+
+}
+
+
 sub generate {
   my ( $self, %args ) = @_;
 
   my $definition = pp( \%args );
   $definition =~ s/^/# /gsm;
 
-  my $prefix = q{};
-
-  $prefix .= "$definition\n";
-  state $passthrough_fields = {
-    store             => 1,
-    boost             => 1,
-    index             => 1,
-    dynamic           => 'Bool',
-    analyzer          => 1,
-    include_in_all    => 1,
-    include_in_parent => 1,
-    include_in_root   => 'Bool',
-    term_vector       => 1,
-    not_analyzed      => 1,
-  };
-
-  my %properties = ( is => rw =>, );
-
-  for my $propname ( keys %{$passthrough_fields} ) {
-    next unless exists $args{propertydata}->{$propname};
-    my $d = $args{propertydata}->{$propname};
-
-    if ( $passthrough_fields->{$propname} eq '1' ) {
-      $properties{$propname} = $d;
-      next;
+  return $self->_inflate_attribute(
+    prefix              => "$definition\n",
+    propertyname        => $args{propertyname},
+    original_definition => \%args,
+    properties          => {
+      is => 'rw',
+      $self->_cleanup_properties( %{ $args{propertydata} } )
     }
-    if ( $passthrough_fields->{$propname} eq 'Bool' ) {
-      require Scalar::Util;
-      if ( Scalar::Util::blessed($d) and Scalar::Util::blessed($d) eq 'JSON::XS::Boolean' ) {
-        $properties{$propname} = ( $d ? 1 : undef );
-        next;
-      }
-      if ( $d eq 'true' or $d eq 'false' ) {
-        $properties{$propname} = ( $d eq 'true' ? 1 : undef );
-        next;
-      }
-    }
-    $properties{$propname} = $d;
-  }
-
-  %properties = ( %properties, expand_type( $args{propertydata}->{type} ) ) if exists $args{propertydata}->{type};
-
-  require ElasticSearchX::Model::Generator::Generated::Attribute;
-  return ElasticSearchX::Model::Generator::Generated::Attribute->new(
-    content => $prefix . $self->fill_attribute_template( $args{propertyname}, $self->hash_to_proplist(%properties) ) );
+  );
 }
 
 no Moo;
@@ -163,7 +187,7 @@ ElasticSearchX::Model::Generator::AttributeGenerator - Generator that emits 'has
 
 =head1 VERSION
 
-version 0.1.5
+version 0.1.6
 
 =head1 METHODS
 
@@ -230,6 +254,19 @@ version 0.1.5
 =head2 _property_template_string
 
 =head2 _attribute_template_string
+
+=head2 _inflate_attribute
+
+    my $attr = $self->_inflate_attribute(
+        prefix => $dump_comment,
+        propertyname => "name of property",
+        properties => \%cleaned_properties_for_has
+        original_definition => \%original_args_to_generate
+    );
+
+=head2 _cleanup_properties
+
+    %cleaned_has_props = $self->_cleanup_properties(%source_props)
 
 =head1 AUTHOR
 
