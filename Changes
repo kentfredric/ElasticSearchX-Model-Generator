@@ -1,6 +1,20 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
-0.1.6 2013-05-16T20:43:46Z
+0.1.6 2013-05-16T20:48:06Z
+ [!Noteworthy Changes]
+ - Split attribute generation further to make overriding generation easier
+
+ [Dependencies::Added / develop requires]
+ - Test::CPAN::Changes 0.19
+
+ [Dependencies::Changed / build requires]
+ - Module::Build 0.4003 → 0.4005
+
+ [Dependencies::Changed / configure requires]
+ - Module::Build 0.4003 → 0.4005
+
+ [Dependencies::Changed / develop suggests]
+ - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.0 → v1.7.3
 
 0.1.5 2013-03-13T09:54:53Z
  [!Noteworthy Changes]
@@ -16,7 +30,7 @@
  - Emit generated attributes with single-quote keys.
  - Add a #ABSTRACT declaration to all generated files
 
- [Dependencies::New / runtime requires]
+ [Dependencies::Added / runtime requires]
  - Path::Tiny
 
  [Dependencies::Removed / runtime requires]
