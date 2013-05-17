@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::DocumentGenerator::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.6';
+  $ElasticSearchX::Model::Generator::DocumentGenerator::VERSION = '0.1.7';
 }
 
 # ABSTRACT: Moose Class generation back end for Documents/Types.
@@ -60,7 +60,7 @@ package %s;
 # ABSTRACT: Generated model for %s
 
 use Moose;
-use ElasticSearchX::Model::Document;
+use ElasticSearchX::Model::Document v0.1.5;
 
 %s
 
@@ -99,7 +99,7 @@ ElasticSearchX::Model::Generator::DocumentGenerator - Moose Class generation bac
 
 =head1 VERSION
 
-version 0.1.6
+version 0.1.7
 
 =head1 METHODS
 
