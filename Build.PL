@@ -40,8 +40,7 @@ my %module_build_args = (
   },
   "script_files" => [],
   "test_requires" => {
-    "ElasticSearchX::Model" => "v0.1.5",
-    "ElasticSearchX::Model::Document" => 0,
+    "ElasticSearchX::Model::Document" => "v0.1.5",
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,
