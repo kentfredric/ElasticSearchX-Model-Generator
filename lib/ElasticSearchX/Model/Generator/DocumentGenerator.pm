@@ -71,7 +71,7 @@ package %s;
 # ABSTRACT: Generated model for %s
 
 use Moose;
-use ElasticSearchX::Model::Document;
+use ElasticSearchX::Model::Document v0.1.5;
 
 %s
 
