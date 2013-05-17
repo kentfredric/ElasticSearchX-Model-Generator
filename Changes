@@ -1,6 +1,8 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
 {{$NEXT}}
+
+0.1.7 2013-05-17T04:26:09Z
  - bugfix for test failures.
 
  [Dependencies::Changed / test requires]
