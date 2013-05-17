@@ -17,7 +17,7 @@ my %module_build_args = (
     "Kent Fredric <kentfredric\@gmail.com>"
   ],
   "dist_name" => "ElasticSearchX-Model-Generator",
-  "dist_version" => "0.1.6",
+  "dist_version" => "0.1.7",
   "license" => "perl",
   "module_name" => "ElasticSearchX::Model::Generator",
   "recommends" => {},
@@ -40,7 +40,7 @@ my %module_build_args = (
   },
   "script_files" => [],
   "test_requires" => {
-    "ElasticSearchX::Model::Document" => 0,
+    "ElasticSearchX::Model::Document" => "v0.1.5",
     "File::Find" => 0,
     "File::Temp" => 0,
     "FindBin" => 0,

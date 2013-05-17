@@ -61,7 +61,7 @@
       },
       "test" : {
          "requires" : {
-            "ElasticSearchX::Model::Document" : "0",
+            "ElasticSearchX::Model::Document" : "v0.1.5",
             "File::Find" : "0",
             "File::Temp" : "0",
             "FindBin" : "0",
@@ -73,27 +73,27 @@
    "provides" : {
       "ElasticSearchX::Model::Generator" : {
          "file" : "lib/ElasticSearchX/Model/Generator.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       },
       "ElasticSearchX::Model::Generator::AttributeGenerator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/AttributeGenerator.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       },
       "ElasticSearchX::Model::Generator::DocumentGenerator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/DocumentGenerator.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       },
       "ElasticSearchX::Model::Generator::Generated::Attribute" : {
          "file" : "lib/ElasticSearchX/Model/Generator/Generated/Attribute.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       },
       "ElasticSearchX::Model::Generator::Generated::Document" : {
          "file" : "lib/ElasticSearchX/Model/Generator/Generated/Document.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       },
       "ElasticSearchX::Model::Generator::TypenameTranslator" : {
          "file" : "lib/ElasticSearchX/Model/Generator/TypenameTranslator.pm",
-         "version" : "v0.1.6"
+         "version" : "v0.1.7"
       }
    },
    "release_status" : "stable",
@@ -108,14 +108,14 @@
          "web" : "https://github.com/kentfredric/ElasticSearchX-Model-Generator"
       }
    },
-   "version" : "0.1.6",
+   "version" : "0.1.7",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.28",
          "Data::Dump" : "1.22",
          "Dist::Zilla::PluginBundle::Author::KENTNL" : "1.7.3",
          "Dist::Zilla::PluginBundle::Author::KENTNL::Lite" : "NA(possibly not installed)",
-         "ElasticSearchX::Model::Document" : "0.1.6",
+         "ElasticSearchX::Model::Document" : "0.1.5",
          "File::Find" : "1.23",
          "File::Temp" : "0.2301",
          "FindBin" : "1.51",

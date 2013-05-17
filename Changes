@@ -1,5 +1,16 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
+0.1.7 2013-05-17T04:26:09Z
+ - bugfix for test failures.
+
+ [Dependencies::Changed / test requires]
+ - ElasticSearchX::Model::Document 0 → v0.1.5
+
+ [Internals]
+ - Generated Models now depen On ESX::M::D 0.1.5 as earlier versions give
+   weird errors, `` Can't use string ("file") as a HASH ref while "strict
+   refs" in use at .../Moose/Meta/Attribute.pm line 106``
+
 0.1.6 2013-05-16T20:51:57Z
  [!Noteworthy Changes]
  - Split attribute generation further to make overriding generation easier
