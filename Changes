@@ -1,10 +1,33 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
+0.1.8 2013-11-25T04:35:49Z
+ [Dependencies::Noteworthy]
+ - new Module::Build
+ - new Test::More
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +45 -3
+ - test: ↑1 -2
+
+ [Maintenance]
+ - Changes file retroactively tidied.
+
+ [Tests]
+ - Switch to Test::Compile::PerFile
+ - Regen ReportVersions::Tiny to not report develop things.
+
 0.1.7 2013-05-17T04:26:09Z
  - bugfix for test failures.
 
- [Dependencies::Changed / test requires]
- - ElasticSearchX::Model::Document 0 → v0.1.5
+ [Dependencies::Noteworthy]
+ - now requires ElasticSearchX::Model::Document v0.1.5
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - test: ↑1
 
  [Internals]
  - Generated Models now depen On ESX::M::D 0.1.5 as earlier versions give
@@ -15,17 +38,14 @@
  [!Noteworthy Changes]
  - Split attribute generation further to make overriding generation easier
 
- [Dependencies::Added / develop requires]
- - Test::CPAN::Changes 0.19
+ [Dependencies::Noteworthy]
+ - requires newer Module::Build 0.4005
 
- [Dependencies::Changed / build requires]
- - Module::Build 0.4003 → 0.4005
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.4003 → 0.4005
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.7.0 → v1.7.3
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +1 ↑1
 
  [Packaging]
  - use test_requires in MB 0.4004
@@ -44,31 +64,26 @@
  - Emit generated attributes with single-quote keys.
  - Add a #ABSTRACT declaration to all generated files
 
- [Dependencies::Added / runtime requires]
- - Path::Tiny
+ [Dependencies::Noteworthy]
+ - uses Path::Tiny
+ - no longer uses Path::Class
 
- [Dependencies::Removed / runtime requires]
- - Path::Class::Dir
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - runtime: +1 -1
 
 0.1.2 2013-03-10T00:14:03Z
  [Bugs]
  - support `transfer-encoding=chunked`
 
- [Dependencies::Added / develop requires]
- - Pod::Coverage::TrustPod
- - Test::CPAN::Meta
- - Test::Pod 1.41
- - Test::Pod::Coverage 1.08
- - version 0.9901
+ [Dependencies::Noteworthy]
+ - requires Module::Build 0.4003
 
- [Dependencies::Changed / build requires]
- - Module::Build 0.4002 → 0.4003
-
- [Dependencies::Changed / configure requires]
- - Module::Build 0.4002 → 0.4003
-
- [Dependencies::Changed / develop suggests]
- - Dist::Zilla::PluginBundle::Author::KENTNL v1.5.0 → v1.7.0
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - build: ↑1
+ - configure: ↑1
+ - develop: +5 ↑1
 
  [Documentation]
  - Copyright dates updated.
@@ -78,9 +93,13 @@
  [Bugs]
  - add test requires to let tests work
 
- [Dependencies::Added / test requires]
- - ElasticSearchX::Model::Document
- - Moose
+ [Dependencies::Noteworthy]
+ - requires ElasticSearchX::Model::Document for tests
+ - requires Moose for tests
+
+ [Dependencies::Stats]
+ - Dependencies changed, see Changes.deps{,.all,.dev} for details
+ - test: +2
 
 0.1.0 2012-08-10T07:47:45Z
  - First version.

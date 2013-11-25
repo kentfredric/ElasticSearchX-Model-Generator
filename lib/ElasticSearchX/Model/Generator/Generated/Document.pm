@@ -6,7 +6,7 @@ BEGIN {
   $ElasticSearchX::Model::Generator::Generated::Document::AUTHORITY = 'cpan:KENTNL';
 }
 {
-  $ElasticSearchX::Model::Generator::Generated::Document::VERSION = '0.1.7';
+  $ElasticSearchX::Model::Generator::Generated::Document::VERSION = '0.1.8';
 }
 
 # ABSTRACT: A Generated C<ESX> Document Model.
@@ -54,7 +54,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -62,7 +62,7 @@ ElasticSearchX::Model::Generator::Generated::Document - A Generated C<ESX> Docum
 
 =head1 VERSION
 
-version 0.1.7
+version 0.1.8
 
 =head1 METHODS
 
