@@ -1,6 +1,8 @@
 ﻿Release history for ElasticSearchX-Model-Generator
 
 {{$NEXT}}
+
+0.1.8 2013-11-25T04:35:49Z
  [Dependencies::Noteworthy]
  - new Module::Build
  - new Test::More
