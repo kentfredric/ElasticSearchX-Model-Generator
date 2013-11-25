@@ -4,7 +4,7 @@ ElasticSearchX::Model::Generator - Create a suite of ESX::Model classes from an 
 
 # VERSION
 
-version 0.1.7
+version 0.1.8
 
 # SYNOPSIS
 
